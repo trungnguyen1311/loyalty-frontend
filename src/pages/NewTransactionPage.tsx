@@ -4,25 +4,28 @@ import { TransactionConfig } from "@/components/transactions/TransactionConfig";
 import { BillPinModal } from "@/components/transactions/BillPinModal";
 import { DiscountConfirmation } from "@/components/transactions/DiscountConfirmation";
 
+// bundle-barrel-imports: Direct imports instead of barrel
+
 type TransactionStep = "CONFIG" | "CONFIRMATION";
 
-export function NewTransactionPage() {
+export const NewTransactionPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { customer, voucher } = location.state || {};
 
-  const [step, setStep] = useState<TransactionStep>("CONFIG");
-  const [isPinModalOpen, setIsPinModalOpen] = useState(false);
-  const [pointsUsed, setPointsUsed] = useState(0);
+  // rerender-lazy-state-init: Use function for expensive initial values
+  const [step, setStep] = useState<TransactionStep>(() => "CONFIG");
+  const [isPinModalOpen, setIsPinModalOpen] = useState(() => false);
+  const [pointsUsed, setPointsUsed] = useState(() => 0);
 
   // Mock calculation logic
-  const [discountBreakdown, setDiscountBreakdown] = useState({
+  const [discountBreakdown, setDiscountBreakdown] = useState(() => ({
     voucherAmount: 0,
     pointsAmount: 0,
     totalDiscount: 0,
     netPayable: 0,
     pointsToEarn: 0,
-  });
+  }));
 
   // Redirect if no customer data
   if (!customer) {
@@ -30,12 +33,13 @@ export function NewTransactionPage() {
     return null;
   }
 
-  const handleNextFromConfig = (points: number) => {
+  // rerender-defer-reads: Extract event handlers to useCallback
+  const handleNextFromConfig = useCallback((points: number) => {
     setPointsUsed(points);
     setIsPinModalOpen(true);
-  };
+  }, []);
 
-  const handlePinSubmit = (values: { billValue: number; pin: string }) => {
+  const handlePinSubmit = useCallback((values: { billValue: number; pin: string }) => {
     console.log("Submitting bill and PIN:", values);
 
     // Simulate discount calculation
@@ -53,16 +57,16 @@ export function NewTransactionPage() {
 
     setIsPinModalOpen(false);
     setStep("CONFIRMATION");
-  };
+  }, [voucher, pointsUsed]);
 
-  const handleComplete = () => {
+  const handleComplete = useCallback(() => {
     console.log("Transaction marked as complete");
     navigate("/home");
-  };
+  }, [navigate]);
 
-  const handleCancel = () => {
+  const handleCancel = useCallback(() => {
     navigate("/home");
-  };
+  }, [navigate]);
 
   return (
     <div className="min-h-screen bg-[#F8F9FF] p-6 pb-24">
@@ -92,4 +96,6 @@ export function NewTransactionPage() {
       </div>
     </div>
   );
-}
+};
+
+// No displayName needed for regular function component

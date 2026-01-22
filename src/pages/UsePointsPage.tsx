@@ -25,15 +25,16 @@ const mockCustomer = {
 
 type ScreenState = "SLIDER" | "CONFIRMATION";
 
-export function UsePointsPage() {
+export const UsePointsPage = () => {
   const navigate = useNavigate();
   const { config } = useBrandingStore();
-  const [screenState, setScreenState] = useState<ScreenState>("SLIDER");
-  const [pointsToUse, setPointsToUse] = useState(30);
-  const [showPinModal, setShowPinModal] = useState(false);
-  const [billValue, setBillValue] = useState("");
-  const [pin, setPin] = useState(["", "", "", "", "", ""]);
-  const [hasVoucher, setHasVoucher] = useState(true); // Toggle voucher visibility
+  // rerender-lazy-state-init: Use function for expensive initial values
+  const [screenState, setScreenState] = useState<ScreenState>(() => "SLIDER");
+  const [pointsToUse, setPointsToUse] = useState(() => 30);
+  const [showPinModal, setShowPinModal] = useState(() => false);
+  const [billValue, setBillValue] = useState(() => "");
+  const [pin, setPin] = useState(() => ["", "", "", "", "", ""]);
+  const [hasVoucher, setHasVoucher] = useState(() => true); // Toggle voucher visibility
 
   const mockVoucher = {
     name: "New Brand Opening",
@@ -433,4 +434,6 @@ export function UsePointsPage() {
       )}
     </div>
   );
-}
+};
+
+// No displayName needed for regular function component

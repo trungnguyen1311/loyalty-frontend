@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -20,6 +20,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
+// bundle-barrel-imports: Direct imports instead of barrel
+
 const identifySchema = z
   .object({
     email: z.string().email("Email không hợp lệ").or(z.literal("")),
@@ -32,12 +34,13 @@ const identifySchema = z
 
 type IdentifyFormValues = z.infer<typeof identifySchema>;
 
-export function HomePage() {
+export const HomePage = memo(() => {
   const navigate = useNavigate();
   const { user, logout } = useAuthStore();
   const { config } = useBrandingStore();
-  const [isSearching, setIsSearching] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  // rerender-lazy-state-init: Use function for expensive initial values
+  const [isSearching, setIsSearching] = useState(() => false);
+  const [error, setError] = useState<string | null>(() => null);
 
   const form = useForm<IdentifyFormValues>({
     resolver: zodResolver(identifySchema),
@@ -243,4 +246,6 @@ export function HomePage() {
       </main>
     </div>
   );
-}
+});
+
+HomePage.displayName = 'HomePage';

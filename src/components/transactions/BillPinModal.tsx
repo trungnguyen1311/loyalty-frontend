@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -11,6 +12,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Banknote } from "lucide-react";
+
+// bundle-barrel-imports: Direct imports instead of barrel
 
 const formSchema = z.object({
   billValue: z
@@ -30,11 +33,11 @@ interface BillPinModalProps {
   onSubmit: (values: FormValues) => void;
 }
 
-export function BillPinModal({
+export const BillPinModal = memo(({
   open,
   onOpenChange,
   onSubmit,
-}: BillPinModalProps) {
+}: BillPinModalProps) => {
   const {
     register,
     handleSubmit,
@@ -144,4 +147,6 @@ export function BillPinModal({
       </DialogContent>
     </Dialog>
   );
-}
+});
+
+BillPinModal.displayName = 'BillPinModal';

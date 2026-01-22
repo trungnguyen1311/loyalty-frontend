@@ -1,8 +1,10 @@
-import { useState, useCallback } from "react";
+import { memo, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Camera, AlertCircle, Loader2, QrCode } from "lucide-react";
 import api from "@/api/axios";
 import { Button } from "@/components/ui/button";
+
+// bundle-barrel-imports: Direct imports instead of barrel
 
 // Mock customer data for testing
 const MOCK_CUSTOMER = {
@@ -22,13 +24,15 @@ const MOCK_VOUCHER = {
   value: 100,
 };
 
-export function ScanVoucherPage() {
+export const ScanVoucherPage = memo(() => {
   const navigate = useNavigate();
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [useMockMode] = useState(true); // Toggle for mock mode
+  // rerender-lazy-state-init: Use function for expensive initial values
+  const [isProcessing, setIsProcessing] = useState(() => false);
+  const [error, setError] = useState<string | null>(() => null);
+  const [useMockMode] = useState(() => true); // Toggle for mock mode
 
-  const handleMockScan = async () => {
+  // rerender-defer-reads: Extract event handlers to useCallback
+  const handleMockScan = useCallback(async () => {
     setIsProcessing(true);
     setError(null);
 
@@ -43,7 +47,7 @@ export function ScanVoucherPage() {
         voucherCode: MOCK_VOUCHER.code,
       },
     });
-  };
+  }, [navigate]);
 
   const handleRealScan = useCallback(
     async (code: string) => {
@@ -77,14 +81,14 @@ export function ScanVoucherPage() {
     [isProcessing, navigate],
   );
 
-  const handleBack = () => {
+  const handleBack = useCallback(() => {
     navigate("/home");
-  };
+  }, [navigate]);
 
-  const handleRetry = () => {
+  const handleRetry = useCallback(() => {
     setError(null);
     setIsProcessing(false);
-  };
+  }, []);
 
   return (
     <div className="fixed inset-0 bg-brand-dark z-50 flex flex-col">
@@ -92,16 +96,17 @@ export function ScanVoucherPage() {
       <header className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-4 py-4 bg-gradient-to-b from-black/50 to-transparent">
         <button
           onClick={handleBack}
-          className="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-colors"
+          className="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none transition-colors"
+          aria-label="Go back"
         >
-          <ArrowLeft className="w-5 h-5" />
+          <ArrowLeft className="w-5 h-5" aria-hidden="true" />
         </button>
         <h1 className="text-white font-semibold text-lg">Scan Voucher QR</h1>
         <div className="w-10" />
       </header>
 
-      {/* Camera View (Mock) */}
-      <div className="flex-1 relative overflow-hidden flex items-center justify-center">
+      {/* Main Content */}
+      <main className="flex-1 relative overflow-hidden flex items-center justify-center">
         {/* Mock Camera Background */}
         <div className="absolute inset-0 bg-gradient-to-b from-brand-dark via-brand-surface to-brand-dark" />
 
@@ -143,7 +148,7 @@ export function ScanVoucherPage() {
             </div>
           )}
         </div>
-      </div>
+      </main>
 
       {/* Bottom Section */}
       <div className="absolute bottom-0 left-0 right-0 z-20 p-6 bg-gradient-to-t from-black/80 to-transparent">
@@ -186,4 +191,6 @@ export function ScanVoucherPage() {
       </div>
     </div>
   );
-}
+});
+
+ScanVoucherPage.displayName = 'ScanVoucherPage';

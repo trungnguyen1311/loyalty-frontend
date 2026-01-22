@@ -1,5 +1,18 @@
 # RULES – Frontend Vibe Coding (Mobile POS)
 
+## AUTO-APPLY INSTRUCTIONS
+🚨 **AI AGENT: Apply these rules AUTOMATICALLY when:**
+- Writing ANY React components
+- Creating new pages or components  
+- Reviewing existing code
+- Optimizing performance
+- Handling state management
+- Designing UI/UX
+
+**Always check against these rules before writing code.**
+
+---
+
 ## 0. Goal
 
 Build a **mobile-first Staff POS web app** for store employees (Cashier / Manager).

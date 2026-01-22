@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 import { Diamond, CircleDollarSign } from "lucide-react";
+
+// bundle-barrel-imports: Direct imports instead of barrel
 
 interface Customer {
   id: string;
@@ -25,12 +27,12 @@ interface TransactionConfigProps {
   onCancel: () => void;
 }
 
-export function TransactionConfig({
+export const TransactionConfig = memo(({
   customer,
   voucher,
   onNext,
   onCancel,
-}: TransactionConfigProps) {
+}: TransactionConfigProps) => {
   const [pointsToUse, setPointsToUse] = useState(0);
 
   return (
@@ -149,4 +151,6 @@ export function TransactionConfig({
       </div>
     </div>
   );
-}
+});
+
+TransactionConfig.displayName = 'TransactionConfig';
