@@ -1,0 +1,32 @@
+{
+  "header": {
+    "logout": "Logout",
+    "language": "Language"
+  },
+  "auth": {
+    "login": "Login",
+    "store_access": "Store Access",
+    "login_description": "Please login to your store to start rewarding your loyal customers",
+    "store": "Store",
+    "select_store": "Select store",
+    "password": "Password",
+    "enter_password": "Enter password",
+    "login_button": "Login Store",
+    "logging_in": "Logging in...",
+    "errors": {
+      "store_required": "Please select a store",
+      "password_min_length": "Password must be at least 6 characters"
+    }
+  },
+  "home": {
+    "description": "Can’t scan the voucher or account QR code? Just enter the details here to continue",
+    "email": "Email",
+    "email_placeholder": "Enter customer’s email",
+    "voucher": "Voucher",
+    "voucher_placeholder": "Enter voucher code",
+    "next": "Next"
+  },
+  "common": {
+    "loading": "Loading..."
+  }
+}

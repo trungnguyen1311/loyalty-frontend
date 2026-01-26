@@ -1,28 +1,166 @@
-import { Receipt } from "lucide-react";
+import { useState } from "react";
+import { TransactionFilters } from "@/components/transaction/transaction-filters";
+import {
+  TransactionTable,
+  Transaction,
+} from "@/components/transaction/transaction-table";
+import { TransactionPagination } from "@/components/transaction/transaction-pagination";
 
-// bundle-barrel-imports: Direct imports instead of barrel
+// Mock data matching Figma design
+const mockTransactions: Transaction[] = [
+  {
+    id: "1",
+    staffName: "Megan Roberts",
+    customerName: "Olsen, Heidi",
+    customerEmail: "abc@gmail.com",
+    bill: 100,
+    currency: "€",
+    date: "22 Oct 2025",
+    time: "3:30 PM",
+    status: "completed",
+  },
+  {
+    id: "2",
+    staffName: "Jonathan Smith",
+    customerName: "Smith, John",
+    customerEmail: "john.smith@gmail.com",
+    bill: 100,
+    currency: "€",
+    date: "22 Oct 2025",
+    time: "3:30 PM",
+    status: "voided",
+  },
+  {
+    id: "3",
+    staffName: "Emily Johnson",
+    customerName: "Johnson, Emma",
+    customerEmail: "emma.johnson@yahoo.com",
+    bill: 100,
+    currency: "€",
+    date: "22 Oct 2025",
+    time: "3:30 PM",
+    status: "completed",
+  },
+  {
+    id: "4",
+    staffName: "Michael Brown",
+    customerName: "Brown, Michael",
+    customerEmail: "michael.brown@hotmail.com",
+    bill: 100,
+    currency: "€",
+    date: "22 Oct 2025",
+    time: "3:30 PM",
+    status: "completed",
+  },
+  {
+    id: "5",
+    staffName: "Sarah Davis",
+    customerName: "Taylor, Olivia",
+    customerEmail: "olivia.taylor@outlook.com",
+    bill: 100,
+    currency: "€",
+    date: "22 Oct 2025",
+    time: "3:30 PM",
+    status: "completed",
+  },
+  {
+    id: "6",
+    staffName: "David Wilson",
+    customerName: "Davis, William",
+    customerEmail: "william.davis@gmail.com",
+    bill: 100,
+    currency: "€",
+    date: "22 Oct 2025",
+    time: "3:30 PM",
+    status: "completed",
+  },
+  {
+    id: "7",
+    staffName: "Jessica Garcia",
+    customerName: "Miller, Sophia",
+    customerEmail: "sophia.miller@icloud.com",
+    bill: 100,
+    currency: "€",
+    date: "22 Oct 2025",
+    time: "3:30 PM",
+    status: "completed",
+  },
+  {
+    id: "8",
+    staffName: "James Martinez",
+    customerName: "Wilson, James",
+    customerEmail: "james.wilson@gmail.com",
+    bill: 100,
+    currency: "€",
+    date: "22 Oct 2025",
+    time: "3:30 PM",
+    status: "voided",
+  },
+  {
+    id: "9",
+    staffName: "Linda Rodriguez",
+    customerName: "Moore, Ava",
+    customerEmail: "ava.moore@yahoo.com",
+    bill: 100,
+    currency: "€",
+    date: "22 Oct 2025",
+    time: "3:30 PM",
+    status: "voided",
+  },
+  {
+    id: "10",
+    staffName: "William Lee",
+    customerName: "Taylor, Daniel",
+    customerEmail: "daniel.taylor@hotmail.com",
+    bill: 100,
+    currency: "€",
+    date: "22 Oct 2025",
+    time: "3:30 PM",
+    status: "voided",
+  },
+];
 
 export const TransactionPage = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [resultsPerPage, setResultsPerPage] = useState(10);
+
+  const handleView = (id: string) => {
+    console.log("View transaction:", id);
+  };
+
+  const handleEdit = (id: string) => {
+    console.log("Edit transaction:", id);
+  };
+
+  const handleCancel = (id: string) => {
+    console.log("Cancel transaction:", id);
+  };
+
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <section>
-        <h1 className="text-xl font-bold mb-1">Giao dịch</h1>
-        <p className="text-muted-foreground">Quản lý danh sách giao dịch</p>
-      </section>
+      {/* Filters */}
+      <TransactionFilters
+        onSearchChange={(value) => console.log("Search:", value)}
+        onStaffChange={(value) => console.log("Staff:", value)}
+        onDateRangeChange={(range) => console.log("Date range:", range)}
+      />
 
-      {/* Empty state */}
-      <section className="bg-card rounded-2xl border border-border p-8 flex flex-col items-center justify-center text-center" role="status" aria-live="polite">
-        <div className="w-16 h-16 bg-muted rounded-2xl flex items-center justify-center mb-4">
-          <Receipt className="w-8 h-8 text-muted-foreground" aria-hidden="true" />
-        </div>
-        <h2 className="font-semibold mb-1">Chưa có giao dịch</h2>
-        <p className="text-sm text-muted-foreground">
-          Các giao dịch sẽ xuất hiện ở đây
-        </p>
-      </section>
+      {/* Table */}
+      <TransactionTable
+        transactions={mockTransactions}
+        onView={handleView}
+        onEdit={handleEdit}
+        onCancel={handleCancel}
+      />
+
+      {/* Pagination */}
+      <TransactionPagination
+        currentPage={currentPage}
+        totalPages={10}
+        resultsPerPage={resultsPerPage}
+        onPageChange={setCurrentPage}
+        onResultsPerPageChange={setResultsPerPage}
+      />
     </div>
   );
 };
-
-// No displayName needed for regular function component

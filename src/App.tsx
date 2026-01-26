@@ -57,14 +57,14 @@ const AppBootstrap = memo(() => {
   // Show loading while bootstrapping
   if (!isInitialized || isLoading) {
     return (
-      <div 
+      <div
         className="min-h-screen min-h-dvh flex items-center justify-center bg-background"
         role="status"
         aria-live="polite"
       >
         <div className="flex flex-col items-center gap-4">
-          <div 
-            className="animate-spin rounded-full h-10 w-10 border-2 border-primary border-t-transparent" 
+          <div
+            className="animate-spin rounded-full h-10 w-10 border-2 border-primary border-t-transparent"
             aria-hidden="true"
           />
           <p className="text-muted-foreground">Đang tải...</p>
@@ -75,25 +75,20 @@ const AppBootstrap = memo(() => {
 
   return (
     <Routes>
-      {/* Public routes */}
-      <Route path="/login" element={<LoginPage />} />
+      <Route element={<AppLayout />}>
+        {/* Public routes */}
+        <Route path="/login" element={<LoginPage />} />
 
-      {/* Protected routes with layout */}
-      <Route element={<ProtectedRoute />}>
-        {/* Full-screen routes (no bottom nav) */}
-        <Route path="/scan-voucher" element={<ScanVoucherPage />} />
-        <Route path="/transactions/new" element={<NewTransactionPage />} />
-        <Route path="/use-points" element={<UsePointsPage />} />
-
-        {/* Routes with AppLayout (bottom nav) */}
-        <Route element={<AppLayout />}>
+        {/* Protected routes */}
+        <Route element={<ProtectedRoute />}>
           <Route path="/home" element={<HomePage />} />
+          <Route path="/scan-voucher" element={<ScanVoucherPage />} />
+          <Route path="/transactions/new" element={<NewTransactionPage />} />
+          <Route path="/use-points" element={<UsePointsPage />} />
 
           {/* Manager-only routes */}
-          {/* <Route element={<ProtectedRoute requireManager />}> */}
-            <Route path="/transactions" element={<TransactionPage />} />
-            <Route path="/dashboard" element={<DashboardPage />} />
-          {/* </Route> */}
+          <Route path="/transactions" element={<TransactionPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
         </Route>
       </Route>
 
@@ -103,7 +98,7 @@ const AppBootstrap = memo(() => {
   );
 });
 
-AppBootstrap.displayName = 'AppBootstrap';
+AppBootstrap.displayName = "AppBootstrap";
 
 const App = memo(() => {
   return (
@@ -113,6 +108,6 @@ const App = memo(() => {
   );
 });
 
-App.displayName = 'App';
+App.displayName = "App";
 
 export default App;

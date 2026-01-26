@@ -1,30 +1,51 @@
-import { memo } from "react";
-import { Outlet } from "react-router-dom";
+import { memo, useMemo } from "react";
+import { Outlet, useLocation } from "react-router-dom";
+import { cn } from "@/lib/utils";
+import { useAuthStore } from "@/stores/authStore";
 import { BottomNav } from "./BottomNav";
+import { Header } from "./Header";
+import styles from "./AppLayout.module.scss";
 
-// bundle-barrel-imports: Direct imports instead of barrel
+// List of routes that should be full width
+const FULL_WIDTH_ROUTES = ["/dashboard", "/transactions"];
+
 export const AppLayout = memo(() => {
+  const { isAuthenticated } = useAuthStore();
+  const location = useLocation();
+
+  // Check if current path starts with any of the full-width routes
+  const isFullWidth = useMemo(() => {
+    return FULL_WIDTH_ROUTES.some((route) =>
+      location.pathname.startsWith(route),
+    );
+  }, [location.pathname]);
+
+  // Common container class to sync Header and Content
+  const containerClass = isFullWidth
+    ? "max-w-full px-6"
+    : "max-w-[830px] mx-auto w-full";
+
   return (
-    <div className="min-h-screen min-h-dvh flex flex-col bg-white relative overflow-hidden">
-      {/* Background blur elements */}
-      <div 
-        className="absolute top-0 left-0 w-[600px] h-[600px] -translate-x-1/2 -translate-y-1/2 bg-blur-info rounded-full pointer-events-none" 
-        aria-hidden="true"
-      />
-      <div 
-        className="absolute top-0 right-0 w-[600px] h-[600px] translate-x-1/2 -translate-y-1/2 bg-blur-primary rounded-full pointer-events-none" 
-        aria-hidden="true"
-      />
+    <div className={cn(styles["app-layout"], "pt-[72px]")}>
+      {/* Header */}
+      <Header containerClass={containerClass} />
 
       {/* Main content area */}
-      <main className="flex-1 pb-24 overflow-auto relative z-10" role="main">
+      <main
+        className={cn(
+          styles["main-content"],
+          containerClass,
+          !isAuthenticated && "pb-0", // Remove bottom padding if no BottomNav
+        )}
+        role="main"
+      >
         <Outlet />
       </main>
 
-      {/* Bottom navigation */}
-      <BottomNav />
+      {/* Bottom navigation - Only show when authenticated */}
+      {isAuthenticated && <BottomNav />}
     </div>
   );
 });
 
-AppLayout.displayName = 'AppLayout';
+AppLayout.displayName = "AppLayout";

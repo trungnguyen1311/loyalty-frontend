@@ -1,0 +1,32 @@
+{
+  "header": {
+    "logout": "Abmelden",
+    "language": "Sprache"
+  },
+  "auth": {
+    "login": "Anmelden",
+    "store_access": "Store-Zugang",
+    "login_description": "Bitte melden Sie sich in Ihrem Store an, um Ihre treuen Kunden zu belohnen",
+    "store": "Store",
+    "select_store": "Store auswählen",
+    "password": "Passwort",
+    "enter_password": "Passwort eingeben",
+    "login_button": "Store Login",
+    "logging_in": "Einloggen...",
+    "errors": {
+      "store_required": "Bitte wählen Sie einen Store aus",
+      "password_min_length": "Das Passwort muss mindestens 6 Zeichen lang sein"
+    }
+  },
+  "home": {
+    "description": "Voucher oder Konto-QR-Code kann nicht gescannt werden? Geben Sie einfach hier die Details ein, um fortzufahren",
+    "email": "Email",
+    "email_placeholder": "E-Mail-Adresse des Kunden eingeben",
+    "voucher": "Voucher",
+    "voucher_placeholder": "Gutscheincode eingeben",
+    "next": "Weiter"
+  },
+  "common": {
+    "loading": "Laden..."
+  }
+}

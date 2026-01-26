@@ -1,7 +1,6 @@
 import { memo, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Camera, AlertCircle, Loader2, QrCode } from "lucide-react";
-import api from "@/api/axios";
 import { Button } from "@/components/ui/button";
 
 // bundle-barrel-imports: Direct imports instead of barrel
@@ -48,38 +47,6 @@ export const ScanVoucherPage = memo(() => {
       },
     });
   }, [navigate]);
-
-  const handleRealScan = useCallback(
-    async (code: string) => {
-      if (isProcessing || !code) return;
-
-      setIsProcessing(true);
-      setError(null);
-
-      try {
-        const response = await api.get("/customers/identify", {
-          params: { voucher: code },
-        });
-
-        if (response.data) {
-          navigate("/transactions/new", {
-            state: { customer: response.data, voucherCode: code },
-          });
-        } else {
-          setError("Mã voucher không hợp lệ. Vui lòng thử lại.");
-          setIsProcessing(false);
-        }
-      } catch (err: any) {
-        if (err.response?.status === 404) {
-          setError("Không tìm thấy voucher. Vui lòng kiểm tra lại.");
-        } else {
-          setError("Có lỗi xảy ra. Vui lòng thử lại.");
-        }
-        setIsProcessing(false);
-      }
-    },
-    [isProcessing, navigate],
-  );
 
   const handleBack = useCallback(() => {
     navigate("/home");

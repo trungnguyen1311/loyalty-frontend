@@ -1,0 +1,45 @@
+.app-layout {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  position: relative;
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    // Base size on viewport height to handle dynamic content better as requested
+    // Figma ratios: 684/787 (frame height) = ~86.9% of frame height
+    width: 70vw;
+    height: 80vh;
+    filter: blur(max(112px, 12vh));
+  }
+
+  // Left Circle - Info
+  &::before {
+    background: rgba(6, 177, 241, 0.12);
+    top: -20vh;
+    left: -20vw;
+  }
+
+  // Right Circle - Primary
+  &::after {
+    background: rgba(121, 107, 255, 0.12);
+    top: 5vh;
+    right: -20vw;
+  }
+}
+
+.main-content {
+  flex: 1;
+  padding-bottom: 6rem; // pb-24
+  overflow: auto;
+  position: relative;
+  z-index: 10;
+}
