@@ -322,8 +322,9 @@ Frontend validation scope:
 
 ### 16.1 Source of Truth
 
-- **NO GUESSING**: Never estimate colors, spacing, or dimensions by looking at images.
-- **USE MCP TOOLS**: Only use parameters returned by Figma MCP tools: `get_design_context`, `get_metadata`, and `get_variable_defs`.
+- **NO GUESSING**: NEVER estimate colors, spacing, dimensions, or text styles by looking at images or by making logical assumptions.
+- **USE MCP TOOLS**: Only use parameters returned by Figma MCP tools (`get_design_context`, `get_metadata`, `get_variable_defs`).
+- **DIRECT FIELD EXTRACTION**: Every single value (font-size, line-height, etc.) MUST be pulled directly from the JSON field of the MCP response. Guessing based on similar elements is strictly forbidden.
 - **Node ID Extraction**: Extract the exact `node-id` from the provided Figma link (e.g., `27-324` becomes `27:324`) to query data.
 
 ### 16.2 Color Management & Tailwind Config

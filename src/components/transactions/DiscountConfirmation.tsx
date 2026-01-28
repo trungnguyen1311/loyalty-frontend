@@ -26,8 +26,8 @@ export function DiscountConfirmation({
       {/* Receipt Card */}
       <div className="relative pt-6">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 z-10">
-          <div className="bg-brand-success/10 rounded-full p-1">
-            <CheckCircle2 className="w-10 h-10 text-brand-success" />
+          <div className="bg-outlineSuccessHighEm/10 rounded-full p-1">
+            <CheckCircle2 className="w-10 h-10 text-outlineSuccessHighEm" />
           </div>
         </div>
 
@@ -59,10 +59,10 @@ export function DiscountConfirmation({
               </div>
 
               <div className="flex justify-between items-center py-2">
-                <span className="text-lg font-black text-brand-primary">
+                <span className="text-lg font-black text-surfacePrimaryHighEm">
                   Total discount
                 </span>
-                <span className="text-xl font-black text-brand-primary">
+                <span className="text-xl font-black text-surfacePrimaryHighEm">
                   €{breakdown.totalDiscount.toLocaleString()}
                 </span>
               </div>
@@ -72,7 +72,7 @@ export function DiscountConfirmation({
               <p className="text-sm font-medium text-muted-foreground italic">
                 Net payable: €{breakdown.netPayable.toLocaleString()}
               </p>
-              <p className="text-xs font-bold text-brand-primary flex items-center justify-center gap-1">
+              <p className="text-xs font-bold text-surfacePrimaryHighEm flex items-center justify-center gap-1">
                 +{breakdown.pointsToEarn} points upon completion
               </p>
             </div>
@@ -91,7 +91,7 @@ export function DiscountConfirmation({
       </div>
 
       <div className="text-center space-y-6">
-        <p className="text-xs font-bold text-brand-error italic max-w-[240px] mx-auto leading-relaxed">
+        <p className="text-xs font-bold text-destructive italic max-w-[240px] mx-auto leading-relaxed">
           Please ensure payment is completed on POS first
         </p>
 
@@ -104,7 +104,7 @@ export function DiscountConfirmation({
           </Button>
           <button
             onClick={onCancel}
-            className="w-full text-sm font-bold text-brand-primary hover:underline py-2"
+            className="w-full text-sm font-bold text-surfacePrimaryHighEm hover:underline py-2"
           >
             Cancel transaction
           </button>

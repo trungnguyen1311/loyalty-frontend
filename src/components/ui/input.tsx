@@ -9,11 +9,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, icon, ...props }, ref) => {
     return (
       <div className="relative w-full">
-        {icon && (
-          <div className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground">
-            {icon}
-          </div>
-        )}
         <input
           type={type}
           className={cn(
@@ -24,6 +19,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           {...props}
         />
+        {icon && (
+          <div className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none z-10">
+            {icon}
+          </div>
+        )}
       </div>
     );
   },

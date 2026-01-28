@@ -1,0 +1,106 @@
+{
+  "nodeId": "18:3006",
+  "name": "Table Columns",
+  "variables": {
+    "color/background/subtle": "#f9fafb",
+    "gray/200": "#E5E7EB",
+    "text/high_em": "#0a0c11",
+    "text/med_em": "#5b616d",
+    "text/success_high_em": "#338732",
+    "text/danger_high_em": "#df2917",
+    "surface/success_base_em_alpha": "#409b3f1f",
+    "surface/danger_base_em_alpha": "#ed40301f",
+    "radius/component/radius_sm": "8px"
+  },
+  "columns": [
+    {
+      "name": "Staffs",
+      "nodeId": "18:3008",
+      "cells": [
+        "Megan Roberts",
+        "Jonathan Smith",
+        "Emily Johnson",
+        "Michael Brown",
+        "Sarah Davis",
+        "David Wilson",
+        "Jessica Garcia",
+        "James Martinez",
+        "Linda Rodriguez",
+        "William Lee"
+      ]
+    },
+    {
+      "name": "Customer name",
+      "nodeId": "18:3041",
+      "cells": [
+        { "name": "Olsen, Heidi", "email": "abc@gmail.com" },
+        { "name": "Smith, John", "email": "john.smith@gmail.com" },
+        { "name": "Johnson, Emma", "email": "emma.johnson@yahoo.com" },
+        { "name": "Brown, Michael", "email": "michael.brown@hotmail.com" },
+        { "name": "Taylor, Olivia", "email": "olivia.taylor@outlook.com" },
+        { "name": "Davis, William", "email": "william.davis@gmail.com" },
+        { "name": "Miller, Sophia", "email": "sophia.miller@icloud.com" },
+        { "name": "Wilson, James", "email": "james.wilson@gmail.com" },
+        { "name": "Moore, Ava", "email": "ava.moore@yahoo.com" },
+        { "name": "Taylor, Daniel", "email": "daniel.taylor@hotmail.com" }
+      ]
+    },
+    {
+      "name": "Bill",
+      "nodeId": "18:3084",
+      "cells": [
+        "€100",
+        "€100",
+        "€100",
+        "€100",
+        "€100",
+        "€100",
+        "€100",
+        "€100",
+        "€100",
+        "€100"
+      ]
+    },
+    {
+      "name": "Date",
+      "nodeId": "18:3110",
+      "cells": [
+        "22 Oct 2025, 3:30 PM",
+        "22 Oct 2025, 3:30 PM",
+        "22 Oct 2025, 3:30 PM",
+        "22 Oct 2025, 3:30 PM",
+        "22 Oct 2025, 3:30 PM",
+        "22 Oct 2025, 3:30 PM",
+        "22 Oct 2025, 3:30 PM",
+        "22 Oct 2025, 3:30 PM",
+        "22 Oct 2025, 3:30 PM",
+        "22 Oct 2025, 3:30 PM"
+      ]
+    },
+    {
+      "name": "Status",
+      "nodeId": "18:3143",
+      "cells": [
+        "Completed",
+        "Voiced",
+        "Completed",
+        "Completed",
+        "Completed",
+        "Completed",
+        "Completed",
+        "Voiced",
+        "Voiced",
+        "Voiced"
+      ]
+    },
+    {
+      "name": "Actions",
+      "nodeId": "18:3172",
+      "icons": ["eye", "edit-02", "cancel-circle"]
+    }
+  ],
+  "pagination": {
+    "nodeId": "18:3305",
+    "pages": [1, 2, 3, 4, 5, "...", 10]
+  }
+}

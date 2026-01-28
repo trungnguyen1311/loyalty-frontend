@@ -1,5 +1,9 @@
 # Skill: 1:1 Figma-to-Code Implementation
 
+id: figma-to-code-1to1
+version: 1.0.0
+category: ui-implementation
+
 ## Objective
 
 Convert Figma designs into React + TailwindCSS code with **absolute 1:1 precision (Pixel Perfect)** based on technical specifications retrieved via MCP.
@@ -11,6 +15,9 @@ Convert Figma designs into React + TailwindCSS code with **absolute 1:1 precisio
 - **NO GUESSING**: Never estimate colors, spacing, or dimensions by looking at images.
 - **USE MCP TOOLS**: Only use parameters returned by Figma MCP tools: `get_design_context`, `get_metadata`, and `get_variable_defs`.
 - **Node ID Extraction**: Extract the exact `node-id` from the provided Figma link (e.g., `27-324` becomes `27:324`) to query data.
+- **NO STYLE ASSOCIATION**: Never assume a node follows a named design token (e.g., "Body 2") just because its size matches. Always verify every individual property (`font-weight`, `line-height`, `letter-spacing`) for that specific `node-id`.
+- **FLEX DISTORTION PREVENTION**: For all fixed-size elements (Icons, Avatars, Specific Shapes) placed within flex containers, you MUST apply `flex-shrink: 0`. This prevents the browser from squashing the element and causing "méo" (distortion).
+- **ASPECT RATIO FIDELITY**: If Figma shows unequal `width` and `height`, maintain that ratio (Ellipse). Even if rounding is applied, do not force a non-square element into a square container as it changes the design intent.
 
 ### 2. Color Management & Tailwind Config
 
@@ -19,7 +26,7 @@ Convert Figma designs into React + TailwindCSS code with **absolute 1:1 precisio
   1. Retrieve the HEX code from Figma MCP.
   2. Check if this color already exists in `tailwind.config.js`.
   3. If **NOT FOUND**: You MUST update `tailwind.config.js` (add to the `brand` object or relevant category) before using it.
-  4. If **FOUND**: Use the corresponding Tailwind class (e.g., `text-brand-primary`).
+  4. If **FOUND**: Use the corresponding Tailwind class (e.g.).
 - **Standard Colors Only**: Do not use default Tailwind colors (e.g., `text-gray-700`) unless the Figma parameters explicitly specify that color code. Never use raw HEX codes in the UI code; they must be mapped through the config.
 
 ### 3. Spacing & Layout
@@ -37,6 +44,7 @@ Convert Figma designs into React + TailwindCSS code with **absolute 1:1 precisio
 
 - **NO "Modernization"**: Do not "improve" the UI based on modern design trends or personal preference.
 - **1:1 Accuracy**: The sole goal is for the code to be a technical clone of the MCP data.
+- **CROSS-CHECK MCP SOURCES**: If `get_design_context` lacks a property, use `get_variable_defs` to see the actual token mapping, OR look for the absence of weight modifiers (e.g., `Poppins:Italic` without `Bold` prefix implies `weight: 400`).
 
 ## Execution Workflow
 

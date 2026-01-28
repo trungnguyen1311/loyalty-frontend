@@ -68,7 +68,7 @@ export const Header = memo(({ containerClass }: HeaderProps) => {
                 />
               </div>
               <div className="flex items-center gap-[2px] px-1">
-                <span className="text-[11px] font-medium text-brand-dark leading-none">
+                <span className="text-[11px] font-medium text-textHighEm leading-none">
                   {currentLang.code}
                 </span>
               </div>
@@ -86,8 +86,8 @@ export const Header = memo(({ containerClass }: HeaderProps) => {
                 className={cn(
                   "flex items-center gap-2 px-2 py-1.5 cursor-pointer rounded-md transition-colors",
                   currentLang.code === lang.code
-                    ? "bg-brand-gray-3/50"
-                    : "hover:bg-brand-gray-3/20",
+                    ? "bg-gray200/50"
+                    : "hover:bg-gray200/20",
                 )}
               >
                 <div className="w-4 h-4 rounded-full overflow-hidden shrink-0 shadow-sm">
@@ -97,7 +97,7 @@ export const Header = memo(({ containerClass }: HeaderProps) => {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <span className="text-xs font-medium text-brand-dark">
+                <span className="text-xs font-medium text-textHighEm">
                   {lang.label}
                 </span>
               </DropdownMenuItem>

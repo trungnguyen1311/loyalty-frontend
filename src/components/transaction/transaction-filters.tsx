@@ -1,4 +1,4 @@
-import { Search, ChevronDown, Calendar as CalendarIcon } from "lucide-react";
+import { Search, Calendar as CalendarIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {

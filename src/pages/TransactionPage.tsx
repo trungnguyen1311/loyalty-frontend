@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { TransactionFilters } from "@/components/transaction/transaction-filters";
+import { Transaction } from "@/components/transaction/transaction-table";
 import {
-  TransactionTable,
-  Transaction,
-} from "@/components/transaction/transaction-table";
-import { TransactionPagination } from "@/components/transaction/transaction-pagination";
+  TableTransaction,
+  Transaction as TableTransactionItem,
+} from "@/components/tables/TableTransaction";
 
 // Mock data matching Figma design
 const mockTransactions: Transaction[] = [
@@ -136,31 +136,41 @@ export const TransactionPage = () => {
     console.log("Cancel transaction:", id);
   };
 
+  // Map to format expected by the new TableTransaction
+  const tableData: TableTransactionItem[] = mockTransactions.map((t) => ({
+    id: t.id,
+    staffName: t.staffName,
+    customerName: t.customerName,
+    customerEmail: t.customerEmail,
+    billAmount: `${t.currency}${t.bill}`,
+    date: `${t.date}, ${t.time}`,
+    status: t.status === "completed" ? "Completed" : "Voiced",
+  }));
+
   return (
     <div className="space-y-6">
-      {/* Filters */}
-      <TransactionFilters
-        onSearchChange={(value) => console.log("Search:", value)}
-        onStaffChange={(value) => console.log("Staff:", value)}
-        onDateRangeChange={(range) => console.log("Date range:", range)}
-      />
+      <div className="flex flex-col gap-2">
+        <h1 className="text-2xl font-semibold text-[#0A0C11]">
+          Old Table (Reference)
+        </h1>
+        <TransactionFilters
+          onSearchChange={(value) => console.log("Search:", value)}
+          onStaffChange={(value) => console.log("Staff:", value)}
+          onDateRangeChange={(range) => console.log("Date range:", range)}
+        />
+      </div>
 
-      {/* Table */}
-      <TransactionTable
-        transactions={mockTransactions}
-        onView={handleView}
-        onEdit={handleEdit}
-        onCancel={handleCancel}
-      />
-
-      {/* Pagination */}
-      <TransactionPagination
-        currentPage={currentPage}
-        totalPages={10}
-        resultsPerPage={resultsPerPage}
-        onPageChange={setCurrentPage}
-        onResultsPerPageChange={setResultsPerPage}
-      />
+      <div className="pt-10 border-t border-dashed border-gray-300">
+        <h1 className="text-2xl font-semibold mb-6 text-[#0A0C11]">
+          New TableTransaction (Figma 1:1)
+        </h1>
+        <TableTransaction
+          data={tableData}
+          onView={handleView}
+          onEdit={handleEdit}
+          onDelete={handleCancel}
+        />
+      </div>
     </div>
   );
 };

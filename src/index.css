@@ -29,6 +29,76 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+
+    /* Figma Tokens */
+    --neutral-600: #666687;
+    --neutral-100: #f6f6f9;
+    --white-100: #ffffff;
+    --text-high-em: #0a0c11;
+    --surface-primary-high-em: #574adb;
+    --surface-primary-base-em: #f5f4ff;
+    --text-med-em: #5b616d;
+    --text-low-em: #8c929c;
+    --text-sub-text: #667085;
+    --text-main-text: #0e0d25;
+    --background-white: #ffffff;
+    --surface-primary-med-em: #6f61ff;
+    --icon-off-white: #f9f9f9;
+    --palette-text-regular: rgba(0, 0, 0, 0.7);
+    --paper: #ffffff;
+    --outline-success-high-em: #409b3f;
+    --outline-primary-button-top: rgba(0, 0, 0, 0.09);
+    --outline-primary-button-bottom: rgba(0, 0, 0, 0.18);
+    --elevation-shadow: rgba(0, 0, 0, 0.03);
+    --color-white-12: rgba(255, 255, 255, 0.12);
+    --color-background-subtle: #f9fafb;
+    --gray-200: #e5e7eb;
+    --color-border-default: #d1d5db;
+    --text-primary: #2f2b3d;
+    --text-secondary: #2f2b3d;
+    --warning-main: #ff9f43;
+    --warning-o-main: rgba(255, 159, 67, 0.16);
+    --text-warning-high-em: #e4a000;
+    --outline-warning-base-em-alpha: rgba(255, 195, 10, 0.2);
+    --surface-special-light-s3-dark-s4: #ececf0;
+    --surface-special-blur-base-light: rgba(255, 255, 255, 0.8);
+    --text-disabled: #2f2b3d;
+    --action-hover: #2f2b3d;
+
+    /* Added from Figma Deep Dive */
+    --surface-special-secondary-alpha-base: rgba(242, 242, 244, 0.8);
+    --outline-secondary-button-bottom: rgba(0, 0, 0, 0.12);
+    --outline-secondary-button-top: rgba(0, 0, 0, 0.06);
+    --outline-base-em: rgba(0, 0, 0, 0.03);
+    --surface-s0: #ffffff;
+    --surface-special-light-s0-dark-s1: #ffffff;
+    --surface-success-base-em-alpha: rgba(64, 155, 63, 0.12);
+    --text-primary-high-em: #574adb;
+
+    /* Spacing & Radius */
+    --radius-xxl: 32px;
+    --radius-xs: 6px;
+    --radius-md: 10px; /* Updated from component radius */
+    --radius-0: 0px;
+    --spacing-xxs: 4px;
+    --spacing-md: 16px;
+    --spacing-xl: 12px; /* Updated */
+    --spacing-3xl: 16px;
+    --spacing-5xl: 20px;
+    --spacing-7xl: 24px;
+
+    /* Typography */
+    --font-size-body-1: 14px;
+    --line-height-body-1: 20px;
+    --font-size-body-2: 16px;
+    --line-height-body-2: 24px;
+    --font-size-title-2: 18px;
+    --line-height-title-2: 24px;
+    --font-size-sm: 14px;
+    --font-weight-semibold: 600;
+    --font-weight-medium: 500;
+    --font-weight-regular: 400;
+    --shadow-receipt: 0px 8px 32px 0px rgba(102, 102, 102, 0.16);
   }
 
   .dark {
@@ -124,13 +194,23 @@ body {
   animation: scan-line 2s ease-in-out infinite;
 }
 
-
-
 @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+@layer utilities {
+  .receipt-perforated {
+    mask-image: radial-gradient(
+      circle at 12.4px 100%,
+      transparent 8.58px,
+      black 8.58px
+    );
+    mask-size: 24.8px 100%;
+    mask-position: -12.4px 0;
+    mask-repeat: repeat-x;
   }
 }

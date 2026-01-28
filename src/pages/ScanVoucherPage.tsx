@@ -58,7 +58,7 @@ export const ScanVoucherPage = memo(() => {
   }, []);
 
   return (
-    <div className="fixed inset-0 bg-brand-dark z-50 flex flex-col">
+    <div className="fixed inset-0 bg-textHighEm z-50 flex flex-col">
       {/* Header */}
       <header className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-4 py-4 bg-gradient-to-b from-black/50 to-transparent">
         <button
@@ -75,17 +75,17 @@ export const ScanVoucherPage = memo(() => {
       {/* Main Content */}
       <main className="flex-1 relative overflow-hidden flex items-center justify-center">
         {/* Mock Camera Background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-dark via-brand-surface to-brand-dark" />
+        <div className="absolute inset-0 bg-gradient-to-b from-textHighEm via-textPrimary to-textHighEm" />
 
         {/* Scan Overlay */}
         <div className="relative z-10 flex flex-col items-center">
           {/* Scan Frame */}
           <div className="relative w-[240px] h-[240px] mb-8">
             {/* Corner Decorations */}
-            <div className="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-brand-primary-light rounded-tl-lg" />
-            <div className="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-brand-primary-light rounded-tr-lg" />
-            <div className="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-brand-primary-light rounded-bl-lg" />
-            <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-brand-primary-light rounded-br-lg" />
+            <div className="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-surfacePrimaryMedEm rounded-tl-lg" />
+            <div className="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-surfacePrimaryMedEm rounded-tr-lg" />
+            <div className="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-surfacePrimaryMedEm rounded-bl-lg" />
+            <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-surfacePrimaryMedEm rounded-br-lg" />
 
             {/* Center Icon */}
             <div className="absolute inset-0 flex items-center justify-center">
@@ -94,14 +94,14 @@ export const ScanVoucherPage = memo(() => {
 
             {/* Scanning Animation Line */}
             {!isProcessing && (
-              <div className="absolute left-2 right-2 h-0.5 bg-brand-primary-light animate-scan-line" />
+              <div className="absolute left-2 right-2 h-0.5 bg-surfacePrimaryMedEm animate-scan-line" />
             )}
           </div>
 
           {/* Mock Mode Banner */}
           {useMockMode && (
-            <div className="bg-brand-warning/20 backdrop-blur-sm rounded-xl px-4 py-2 mb-4">
-              <p className="text-brand-warning text-sm font-medium">
+            <div className="bg-textWarningHighEm/20 backdrop-blur-sm rounded-xl px-4 py-2 mb-4">
+              <p className="text-textWarningHighEm text-sm font-medium">
                 🧪 Mock Mode - Camera Disabled
               </p>
             </div>
@@ -110,7 +110,7 @@ export const ScanVoucherPage = memo(() => {
           {/* Processing Overlay */}
           {isProcessing && (
             <div className="flex flex-col items-center">
-              <Loader2 className="w-12 h-12 text-brand-primary-light animate-spin mb-4" />
+              <Loader2 className="w-12 h-12 text-surfacePrimaryMedEm animate-spin mb-4" />
               <p className="text-white font-medium">Đang xử lý...</p>
             </div>
           )}
@@ -120,13 +120,13 @@ export const ScanVoucherPage = memo(() => {
       {/* Bottom Section */}
       <div className="absolute bottom-0 left-0 right-0 z-20 p-6 bg-gradient-to-t from-black/80 to-transparent">
         {error ? (
-          <div className="bg-brand-error/20 backdrop-blur-sm rounded-2xl p-4 mb-4 flex items-start gap-3">
-            <AlertCircle className="w-5 h-5 text-brand-error shrink-0 mt-0.5" />
+          <div className="bg-destructive/20 backdrop-blur-sm rounded-2xl p-4 mb-4 flex items-start gap-3">
+            <AlertCircle className="w-5 h-5 text-destructive shrink-0 mt-0.5" />
             <div className="flex-1">
               <p className="text-white font-medium">{error}</p>
               <button
                 onClick={handleRetry}
-                className="text-brand-primary-light text-sm font-medium mt-2 hover:underline"
+                className="text-surfacePrimaryMedEm text-sm font-medium mt-2 hover:underline"
               >
                 Thử lại
               </button>

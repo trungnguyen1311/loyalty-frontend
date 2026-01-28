@@ -9,7 +9,7 @@ export const HomePage = memo(() => {
   const navigate = useNavigate();
 
   return (
-    <div className="mt-4 flex w-full flex-col items-center justify-center gap-[14px] rounded-[16px] bg-brand-white p-[34px]">
+    <div className="mt-4 flex w-full flex-col items-center justify-center gap-[14px] rounded-[16px] bg-white100 p-[34px]">
       {/* Header Image */}
       <div className="h-[194px] w-[364px] overflow-hidden rounded-[16px]">
         <img
@@ -21,7 +21,7 @@ export const HomePage = memo(() => {
 
       {/* Title */}
       <div className="mt-6 flex flex-col items-center text-center">
-        <h1 className="font-semibold text-brand-primary text-[22px] leading-[28px] tracking-[-0.2px]">
+        <h1 className="font-semibold text-surfacePrimaryHighEm text-[22px] leading-[28px] tracking-[-0.2px]">
           Lepau Restaurant Kuching
         </h1>
       </div>
@@ -29,20 +29,20 @@ export const HomePage = memo(() => {
       {/* Form Group (Description + Fields + Button) */}
       <div className="flex w-full flex-col gap-[24px]">
         {/* Description */}
-        <p className="w-full text-center text-[18px] font-normal text-brand-black leading-[24px]">
+        <p className="w-full text-center text-[18px] font-normal text-textHighEm leading-[24px]">
           {t("home.description")}
         </p>
 
         {/* Fields */}
         <div className="flex w-full flex-col gap-4">
           <div className="flex flex-col gap-1">
-            <label className="px-[2px] text-sm font-medium text-brand-gray-1 leading-5">
+            <label className="px-[2px] text-sm font-medium text-textMedEm leading-5">
               {t("home.email")}
             </label>
             <Input
               type="email"
               placeholder={t("home.email_placeholder")}
-              className="h-[48px] rounded-[12px] border-brand-gray-3 text-base placeholder:text-brand-gray-2"
+              className="h-[48px] rounded-[12px] border-gray200 text-base placeholder:text-textLowEm"
               icon={
                 <img
                   src="/assets/home/email-icon.svg"
@@ -54,13 +54,13 @@ export const HomePage = memo(() => {
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="px-[2px] text-sm font-medium text-brand-gray-1 leading-5">
+            <label className="px-[2px] text-sm font-medium text-textMedEm leading-5">
               {t("home.voucher")}
             </label>
             <Input
               type="text"
               placeholder={t("home.voucher_placeholder")}
-              className="h-[48px] rounded-[12px] border-brand-gray-3 text-base placeholder:text-brand-gray-2"
+              className="h-[48px] rounded-[12px] border-gray200 text-base placeholder:text-textLowEm"
               icon={
                 <img
                   src="/assets/home/voucher-icon.svg"
@@ -73,7 +73,7 @@ export const HomePage = memo(() => {
         </div>
 
         <Button
-          className="h-[48px] w-full rounded-[12px] bg-brand-primary-light text-base font-medium shadow-[0px_1px_1px_-0.5px_rgba(0,0,0,0.03)] backdrop-blur-[12px] hover:opacity-90 transition-opacity"
+          className="h-[48px] w-full rounded-[12px] bg-surfacePrimaryMedEm text-base font-medium shadow-[0px_1px_1px_-0.5px_rgba(0,0,0,0.03)] backdrop-blur-[12px] hover:opacity-90 transition-opacity"
           size="lg"
           onClick={() => navigate("/next-step")}
         >

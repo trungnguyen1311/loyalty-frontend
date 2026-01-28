@@ -38,7 +38,7 @@ export const TransactionConfig = memo(
           <CardContent className="p-6">
             <div className="flex flex-col items-center gap-4">
               <div className="relative">
-                <div className="w-20 h-20 rounded-full border-4 border-white shadow-sm overflow-hidden bg-brand-primary/10 flex items-center justify-center">
+                <div className="w-20 h-20 rounded-full border-4 border-white shadow-sm overflow-hidden bg-surfacePrimaryHighEm/10 flex items-center justify-center">
                   <img
                     src={customer.avatar}
                     alt={customer.name}
@@ -51,22 +51,22 @@ export const TransactionConfig = memo(
               <div className="grid grid-cols-2 gap-4 w-full">
                 <div className="bg-white rounded-2xl p-3 flex items-center justify-center gap-2 shadow-sm">
                   <Diamond
-                    className="w-4 h-4 text-brand-primary"
+                    className="w-4 h-4 text-surfacePrimaryHighEm"
                     fill="currentColor"
                   />
                   <span className="text-sm font-medium text-muted-foreground mr-1">
                     Level
                   </span>
-                  <span className="text-sm font-bold text-brand-warning">
+                  <span className="text-sm font-bold text-textWarningHighEm">
                     {customer.level}
                   </span>
                 </div>
                 <div className="bg-white rounded-2xl p-3 flex items-center justify-center gap-2 shadow-sm">
-                  <CircleDollarSign className="w-4 h-4 text-brand-primary" />
+                  <CircleDollarSign className="w-4 h-4 text-surfacePrimaryHighEm" />
                   <span className="text-sm font-medium text-muted-foreground mr-1">
                     Points
                   </span>
-                  <span className="text-sm font-bold text-brand-success">
+                  <span className="text-sm font-bold text-outlineSuccessHighEm">
                     {customer.points.toLocaleString()}
                   </span>
                 </div>
@@ -80,7 +80,7 @@ export const TransactionConfig = memo(
           <div className="relative group">
             <div className="flex bg-white rounded-2xl overflow-hidden shadow-sm border border-border/50">
               {/* Left side label */}
-              <div className="bg-brand-primary text-white w-12 flex items-center justify-center py-4 relative">
+              <div className="bg-surfacePrimaryHighEm text-white w-12 flex items-center justify-center py-4 relative">
                 <span className="font-bold text-xs uppercase tracking-widest [writing-mode:vertical-lr] rotate-180">
                   VOUCHER
                 </span>
@@ -93,10 +93,10 @@ export const TransactionConfig = memo(
                 <p className="text-sm text-muted-foreground font-medium mb-1">
                   {voucher.name}
                 </p>
-                <h3 className="text-2xl font-black text-brand-dark mb-2">
+                <h3 className="text-2xl font-black text-textHighEm mb-2">
                   Discount: {voucher.discount}
                 </h3>
-                <p className="inline-block px-3 py-1 bg-muted rounded-lg text-xs font-mono font-bold text-brand-primary">
+                <p className="inline-block px-3 py-1 bg-muted rounded-lg text-xs font-mono font-bold text-surfacePrimaryHighEm">
                   {voucher.code}
                 </p>
               </div>
@@ -107,10 +107,10 @@ export const TransactionConfig = memo(
         {/* Points usage slider */}
         <div className="space-y-4 px-2">
           <div className="flex justify-between items-center">
-            <span className="font-bold text-sm text-brand-dark">
+            <span className="font-bold text-sm text-textHighEm">
               Use points
             </span>
-            <span className="px-3 py-1 bg-brand-primary/10 rounded-full text-brand-primary font-bold">
+            <span className="px-3 py-1 bg-surfacePrimaryHighEm/10 rounded-full text-surfacePrimaryHighEm font-bold">
               {pointsToUse.toLocaleString()}
             </span>
           </div>
@@ -135,14 +135,14 @@ export const TransactionConfig = memo(
         {/* Actions */}
         <div className="space-y-3 pt-4">
           <Button
-            className="w-full h-14 text-base font-bold shadow-xl bg-brand-primary-light hover:bg-brand-primary"
+            className="w-full h-14 text-base font-bold shadow-xl bg-surfacePrimaryMedEm hover:bg-surfacePrimaryHighEm"
             onClick={() => onNext(pointsToUse)}
           >
             Next
           </Button>
           <button
             onClick={onCancel}
-            className="w-full text-sm font-bold text-brand-primary hover:underline py-2"
+            className="w-full text-sm font-bold text-surfacePrimaryHighEm hover:underline py-2"
           >
             Cancel transaction
           </button>

@@ -1,0 +1,166 @@
+.shadowWrapper {
+  filter: drop-shadow(0px 8px 32px rgba(102, 102, 102, 0.16));
+  width: 329px;
+  height: 377px;
+  margin-bottom: 20px; /* Space for the shadow and the teeth to be visible */
+}
+
+.receiptCard {
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 24px 24px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25.6px 24px 44px;
+  position: relative;
+  box-sizing: border-box;
+
+  /* Perforated edge effect - using precise Figma spacing and radius */
+  -webkit-mask-image: radial-gradient(
+    circle at 12.35px 376.5px,
+    transparent 8.58px,
+    black 8.58px
+  );
+  -webkit-mask-size: 24.7px 100%;
+  -webkit-mask-repeat: repeat-x;
+
+  mask-image: radial-gradient(
+    circle at 12.35px 376.5px,
+    transparent 8.58px,
+    black 8.58px
+  );
+  mask-size: 24.7px 100%;
+  mask-repeat: repeat-x;
+}
+
+.successOuter {
+  width: 56.264px;
+  height: 59px;
+  background: var(--surface-success-base-em-alpha);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 7.36px;
+  flex-shrink: 0;
+}
+
+.successInner {
+  width: 32.151px;
+  height: 33.714px;
+  background: #409b3f;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.headerText {
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 600; /* SemiBold */
+  line-height: 28px;
+  color: #121212; /* Exact color from MCP text-[#121212] */
+  text-align: center;
+  margin-bottom: 11px;
+}
+
+.divider {
+  width: 283px;
+  border-top: 1px dashed rgba(102, 97, 135, 0.2);
+  margin: 0;
+}
+
+.rowContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0 12px;
+  gap: 12px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.label {
+  font-family: "Poppins", sans-serif;
+  font-size: 14px; /* From Body 1/normal */
+  font-weight: 400; /* Regular */
+  color: var(--text-med-em);
+  line-height: 20px;
+}
+
+.value {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px; /* From Body 2/medium */
+  font-weight: 500; /* Medium */
+  color: var(--text-high-em);
+  line-height: 24px;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-top: 12px;
+  padding-bottom: 15px;
+}
+
+.totalLabel {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px; /* From Heading 2/semibold */
+  font-weight: 600; /* SemiBold */
+  color: var(--text-primary-high-em);
+  letter-spacing: -0.2px;
+  line-height: 28px;
+}
+
+.totalValue {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px; /* From Heading 2/semibold */
+  font-weight: 600; /* SemiBold */
+  color: var(--text-primary-high-em);
+  letter-spacing: -0.2px;
+  line-height: 28px;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 16px;
+  gap: 6px; /* 32px (y diff) - 26px (approx lh) = 6px */
+}
+
+.netPayable {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px; /* Exact from MCP */
+  font-weight: 400; /* Correction: Regular instead of Medium */
+  font-style: italic;
+  color: #5b616d; /* Exact from MCP */
+  line-height: 25.6px; /* 160% of 16px */
+  letter-spacing: -0.32px; /* Exact from MCP */
+  text-align: center;
+  margin: 0;
+}
+
+.pointsEarned {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px; /* Exact from MCP */
+  font-weight: 400; /* Correction: Regular instead of Medium */
+  font-style: normal;
+  color: #5b616d; /* Exact from MCP */
+  line-height: 25.6px; /* 160% of 16px */
+  letter-spacing: -0.32px; /* Exact from MCP */
+  text-align: center;
+  margin: 0;
+}

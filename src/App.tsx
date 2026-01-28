@@ -14,7 +14,6 @@ import { HomePage } from "@/pages/HomePage";
 import { ScanVoucherPage } from "@/pages/ScanVoucherPage";
 import { TransactionPage } from "@/pages/TransactionPage";
 import { DashboardPage } from "@/pages/DashboardPage";
-import { NewTransactionPage } from "@/pages/NewTransactionPage";
 import { UsePointsPage } from "@/pages/UsePointsPage";
 
 // bundle-barrel-imports: Direct imports instead of barrel
@@ -83,7 +82,6 @@ const AppBootstrap = memo(() => {
         <Route element={<ProtectedRoute />}>
           <Route path="/home" element={<HomePage />} />
           <Route path="/scan-voucher" element={<ScanVoucherPage />} />
-          <Route path="/transactions/new" element={<NewTransactionPage />} />
           <Route path="/use-points" element={<UsePointsPage />} />
 
           {/* Manager-only routes */}
@@ -102,7 +100,9 @@ AppBootstrap.displayName = "AppBootstrap";
 
 const App = memo(() => {
   return (
-    <BrowserRouter>
+    <BrowserRouter
+      future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+    >
       <AppBootstrap />
     </BrowserRouter>
   );
