@@ -42,7 +42,7 @@
     --text-sub-text: #667085;
     --text-main-text: #0e0d25;
     --background-white: #ffffff;
-    --surface-primary-med-em: #6f61ff;
+    --surface-primary-med-em: #796bff;
     --icon-off-white: #f9f9f9;
     --palette-text-regular: rgba(0, 0, 0, 0.7);
     --paper: #ffffff;
@@ -55,7 +55,7 @@
     --gray-200: #e5e7eb;
     --color-border-default: #d1d5db;
     --text-primary: #2f2b3d;
-    --text-secondary: #2f2b3d;
+    --text-secondary: rgba(47, 43, 61, 0.7);
     --warning-main: #ff9f43;
     --warning-o-main: rgba(255, 159, 67, 0.16);
     --text-warning-high-em: #e4a000;
@@ -64,22 +64,43 @@
     --surface-special-blur-base-light: rgba(255, 255, 255, 0.8);
     --text-disabled: #2f2b3d;
     --action-hover: #2f2b3d;
+    --color-white-3: rgba(255, 255, 255, 0.03);
+    --surface-inverse-white: #000000;
+
 
     /* Added from Figma Deep Dive */
     --surface-special-secondary-alpha-base: rgba(242, 242, 244, 0.8);
     --outline-secondary-button-bottom: rgba(0, 0, 0, 0.12);
     --outline-secondary-button-top: rgba(0, 0, 0, 0.06);
     --outline-base-em: rgba(0, 0, 0, 0.03);
+    --outline-med-em: rgba(0, 0, 0, 0.09);
     --surface-s0: #ffffff;
+    --surface-s1: #f9f9fa;
     --surface-special-light-s0-dark-s1: #ffffff;
     --surface-success-base-em-alpha: rgba(64, 155, 63, 0.12);
     --text-primary-high-em: #574adb;
+    --surface-danger-base-em-alpha: rgba(237, 64, 48, 0.12);
+    --surface-info-base-em-alpha: rgba(6, 177, 241, 0.12);
+    --outline-info-high-em: #06b1f1;
+    --surface-success-med-em: #409b3f;
+    --surface-success-low-em: #e3f6e2;
+    --surface-info-low-em: #dff3ff;
+    --surface-info-med-em: #06b1f1;
+    --misc-card-header: 24px;
+    --universal-palette-border-white: #ffffff;
+    --universal-palette-text-regular: rgba(0, 0, 0, 0.7);
+    --gray-2: #606060;
+    --light-gray: #e2e2e2;
+    --shadow-card: 0px 3px 12px 0px rgba(47, 43, 61, 0.14);
 
     /* Spacing & Radius */
     --radius-xxl: 32px;
     --radius-xs: 6px;
+    --radius-comp-lg: 12px;
+    --radius-comp-sm: 8px; /* Added matching Figma token */
     --radius-md: 10px; /* Updated from component radius */
     --radius-0: 0px;
+    --radius-big-component-sm: 20px; /* Added from Dropmenu */
     --spacing-xxs: 4px;
     --spacing-md: 16px;
     --spacing-xl: 12px; /* Updated */
@@ -93,12 +114,36 @@
     --font-size-body-2: 16px;
     --line-height-body-2: 24px;
     --font-size-title-2: 18px;
+    --font-size-title-2: 18px;
     --line-height-title-2: 24px;
+    --font-size-heading-2: 22px;
+    --line-height-heading-2: 28px;
+
     --font-size-sm: 14px;
     --font-weight-semibold: 600;
     --font-weight-medium: 500;
     --font-weight-regular: 400;
     --shadow-receipt: 0px 8px 32px 0px rgba(102, 102, 102, 0.16);
+
+    /* Figma Datepicker Tokens (from MCP + REST API) */
+    --text-base-em: #c3c6cc;
+    --outline-low-em: rgba(0, 0, 0, 0.06);
+    --space-xxs: 2px;
+    --space-xs: 4px;
+    --space-sm: 6px;
+    --space-md: 8px;
+    --space-lg: 10px;
+    --space-xl: 12px;
+    --space-3xl: 16px;
+    --space-4xl: 18px;
+    --radius-component-sm: 8px;
+    --radius-component-md: 10px;
+    --radius-component-lg: 12px;
+    --radius-big-component-md: 24px;
+    
+    /* Component effect shadows */
+    --shadow-secondary-default: 0px 2px 1.5px -0.5px rgba(0, 0, 0, 0.03);
+    --shadow-primary-default: 0px 1px 1px -0.5px rgba(0, 0, 0, 0.03);
   }
 
   .dark {
@@ -126,6 +171,21 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+
+    /* Figma Calendar Specific */
+    --space-figma-xxs: 2px;
+    --space-figma-xs: 4px;
+    --space-figma-md: 8px;
+    --space-figma-4xl: 18px;
+    --space-figma-10xl: 32px;
+
+    --radius-comp-sm: 8px;
+    --radius-figma-md: 10px;
+    --radius-big-comp-md: 24px;
+
+    --surface-s1: #f9f9fa;
+    --text-base-em: #c3c6cc;
+    --surface-special-light-s0-dark-s2: #ffffff;
   }
 }
 

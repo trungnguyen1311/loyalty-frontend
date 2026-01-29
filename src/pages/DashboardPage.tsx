@@ -1,215 +1,172 @@
 import { memo, useState } from "react";
-import { Gift, ShoppingCart, Ticket, Users, Calendar } from "lucide-react";
+import { CalendarIcon, Gift, ShoppingCart, Ticket, Users } from "lucide-react";
+import { format } from "date-fns";
 
-// bundle-barrel-imports: Direct imports instead of barrel
-// rerender-lazy-state-init: Use function for expensive initial values
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Popover,
+  PopoverContentUnstyled,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { DatePickerFigma } from "@/components/ui/datepicker-figma";
+import { cn } from "@/lib/utils";
+import { EarningReportsChart } from "@/components/reports/EarningReportsChart";
+
 export const DashboardPage = memo(() => {
-  const [selectedPeriod] = useState(() => "Daily");
-  const [selectedDate] = useState(() => "November 11, 2025");
+  const [selectedPeriod, setSelectedPeriod] = useState("Daily");
+  const [date, setDate] = useState<Date | undefined>(new Date(2025, 10, 11)); // November 11, 2025
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-white to-purple-50 p-4">
-      {/* Filter Bar */}
-      <div className="flex gap-3 mb-6">
-        <button
-          className="flex-1 flex items-center justify-between px-4 py-2 bg-white rounded-full shadow-sm hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:outline-none transition-colors"
-          aria-label={`Selected period: ${selectedPeriod}`}
-        >
-          <span className="text-sm font-medium">{selectedPeriod}</span>
-          {/* Use lucide icon instead of inline SVG */}
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
-        </button>
+    <div className="min-h-screen py-6 flex flex-col gap-6">
+      <div className="flex flex-col gap-6 w-full mx-auto">
+        {/* Header Section: Filters and Stats */}
+        <div className="flex flex-col gap-6">
+          {/* Filter Bar */}
+          <div className="flex items-center gap-3">
+            {/* Daily Filter */}
+            <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
+              <SelectTrigger className="w-[274px] h-[48px] bg-white border-outlineMedEm px-3 py-0 text-body-2 text-textHighEm font-regular [&>span]:line-clamp-1 [&>svg]:w-5 [&>svg]:h-5 [&>svg]:opacity-100 [&>svg]:text-textHighEm">
+                <div className="flex items-center gap-1">
+                  <SelectValue placeholder="Select period" />
+                </div>
+              </SelectTrigger>
+              <SelectContent
+                align="start"
+                className="w-[274px] rounded-big-comp-sm border border-outlineBaseEm bg-surfaceSpecialBlurBaseLight backdrop-blur-3xl shadow-e3 p-2 [&>div]:min-w-0 [&>div]:p-0"
+              >
+                <SelectItem
+                  value="Daily"
+                  className="rounded-comp-lg px-3 py-2.5 text-body-2 text-textHighEm bg-transparent focus:bg-surfacePrimaryBaseEm focus:text-textHighEm cursor-pointer data-[state=checked]:bg-neutral100"
+                >
+                  Daily
+                </SelectItem>
+                <SelectItem
+                  value="Weekly"
+                  className="rounded-comp-lg px-3 py-2.5 text-body-2 text-textHighEm bg-transparent focus:bg-surfacePrimaryBaseEm focus:text-textHighEm cursor-pointer data-[state=checked]:bg-neutral100"
+                >
+                  Weekly
+                </SelectItem>
+                <SelectItem
+                  value="Monthly"
+                  className="rounded-comp-lg px-3 py-2.5 text-body-2 text-textHighEm bg-transparent focus:bg-surfacePrimaryBaseEm focus:text-textHighEm cursor-pointer data-[state=checked]:bg-neutral100"
+                >
+                  Monthly
+                </SelectItem>
+              </SelectContent>
+            </Select>
 
-        <button
-          className="flex-1 flex items-center justify-between px-4 py-2 bg-white rounded-full shadow-sm hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:outline-none transition-colors"
-          aria-label={`Selected date: ${selectedDate}`}
-        >
-          <span className="text-sm font-medium">{selectedDate}</span>
-          <Calendar className="w-4 h-4 text-gray-500" aria-hidden="true" />
-        </button>
-      </div>
+            {/* Date Filter */}
+            <Popover>
+              <PopoverTrigger asChild>
+                <button
+                  className={cn(
+                    "flex items-center justify-between w-[274px] h-[48px] bg-white border border-outlineMedEm rounded-comp-lg px-3 py-0 text-body-2 text-textHighEm font-regular hover:bg-white focus:outline-none",
+                    !date && "text-muted-foreground",
+                  )}
+                >
+                  <div className="flex items-center gap-1">
+                    {date ? (
+                      format(date, "MMMM dd, yyyy")
+                    ) : (
+                      <span>Pick a date</span>
+                    )}
+                  </div>
+                  <div className="w-5 h-5 flex items-center justify-center">
+                    <CalendarIcon className="w-5 h-5 text-textHighEm" />
+                  </div>
+                </button>
+              </PopoverTrigger>
+              <PopoverContentUnstyled align="start">
+                <DatePickerFigma selected={date} onSelect={setDate} />
+              </PopoverContentUnstyled>
+            </Popover>
+          </div>
 
-      {/* Main Content */}
-      <div className="space-y-6">
-        {/* Summary Metric Cards - 2x2 Grid for Mobile */}
-        <div className="grid grid-cols-2 gap-4">
-          {/* Card 1: Total Points Earned */}
-          <div className="bg-white rounded-2xl p-4 shadow-sm">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
-                <Gift className="w-5 h-5 text-green-600" />
+          {/* Stats Cards Row */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-start w-full">
+            {/* Total Points Earned */}
+            <div className="flex flex-1 items-center gap-3 bg-white shadow-e3 rounded-comp-lg p-4">
+              <div className="w-10 h-10 rounded-xs bg-surfaceSuccessBaseEmAlpha flex items-center justify-center shrink-0">
+                <Gift
+                  className="w-[26px] h-[26px] text-outlineSuccessHighEm"
+                  strokeWidth={1.5}
+                />
               </div>
-              <div>
-                <p className="text-xs text-gray-500 font-medium">
+              <div className="flex flex-col gap-0.5">
+                <span className="text-body-2 text-textMedEm font-regular">
                   Total Points Earned
-                </p>
-                <p className="text-lg font-bold text-gray-900">13,450</p>
+                </span>
+                <span className="text-title-2 text-textHighEm font-semibold">
+                  13,450
+                </span>
               </div>
             </div>
-          </div>
 
-          {/* Card 2: Total Points Spent */}
-          <div className="bg-white rounded-2xl p-4 shadow-sm">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center">
-                <ShoppingCart className="w-5 h-5 text-red-600" />
+            {/* Total Points Spent */}
+            <div className="flex flex-1 items-center gap-3 bg-white shadow-e3 rounded-comp-lg p-4">
+              <div className="w-10 h-10 rounded-xs bg-surfaceDangerBaseEmAlpha flex items-center justify-center shrink-0">
+                <ShoppingCart
+                  className="w-[26px] h-[26px] text-destructive"
+                  strokeWidth={1.5}
+                />
               </div>
-              <div>
-                <p className="text-xs text-gray-500 font-medium">
+              <div className="flex flex-col gap-0.5">
+                <span className="text-body-2 text-textMedEm font-regular">
                   Total Points Spent
-                </p>
-                <p className="text-lg font-bold text-gray-900">29,980</p>
+                </span>
+                <span className="text-title-2 text-textHighEm font-semibold">
+                  29,980
+                </span>
               </div>
             </div>
-          </div>
 
-          {/* Card 3: Total Used Vouchers */}
-          <div className="bg-white rounded-2xl p-4 shadow-sm">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
-                <Ticket className="w-5 h-5 text-blue-600" />
+            {/* Total Used Vouchers */}
+            <div className="flex flex-1 items-center gap-3 bg-white shadow-e3 rounded-comp-lg p-4">
+              <div className="w-10 h-10 rounded-xs bg-surfaceInfoBaseEmAlpha flex items-center justify-center shrink-0">
+                <Ticket
+                  className="w-[26px] h-[26px] text-outlineInfoHighEm"
+                  strokeWidth={1.5}
+                />
               </div>
-              <div>
-                <p className="text-xs text-gray-500 font-medium">
+              <div className="flex flex-col gap-0.5">
+                <span className="text-body-2 text-textMedEm font-regular">
                   Total Used Vouchers
-                </p>
-                <p className="text-lg font-bold text-gray-900">13,450</p>
+                </span>
+                <span className="text-title-2 text-textHighEm font-semibold">
+                  13,450
+                </span>
               </div>
             </div>
-          </div>
 
-          {/* Card 4: Total Paid User */}
-          <div className="bg-white rounded-2xl p-4 shadow-sm">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
-                <Users className="w-5 h-5 text-purple-600" />
+            {/* Total Paid User */}
+            <div className="flex flex-1 items-center gap-3 bg-white shadow-e3 rounded-comp-lg p-4">
+              <div className="w-10 h-10 rounded-xs bg-surfacePrimaryBaseEm flex items-center justify-center shrink-0">
+                <Users
+                  className="w-[26px] h-[26px] text-primary"
+                  strokeWidth={1.5}
+                />
               </div>
-              <div>
-                <p className="text-xs text-gray-500 font-medium">
+              <div className="flex flex-col gap-0.5">
+                <span className="text-body-2 text-textMedEm font-regular">
                   Total Paid User
-                </p>
-                <p className="text-lg font-bold text-gray-900">1,250</p>
+                </span>
+                <span className="text-title-2 text-textHighEm font-semibold">
+                  1,250
+                </span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Reports Section */}
-        <div className="bg-white rounded-2xl p-4 shadow-sm">
-          <div className="mb-4">
-            <h2 className="text-base font-semibold text-gray-900 mb-1">
-              Reports
-            </h2>
-            <p className="text-xs text-gray-500 italic">
-              You informed of this week compared to last week
-            </p>
-          </div>
-
-          {/* Bar Chart */}
-          <div className="h-48 relative overflow-x-auto">
-            {/* Chart Bars */}
-            <div className="flex items-end justify-between h-32 min-w-max px-2">
-              {/* 8 AM */}
-              <div className="flex items-end gap-0.5 flex-1 max-w-[50px] mx-1">
-                <div className="w-3 h-12 bg-green-500 rounded-t"></div>
-                <div className="w-3 h-8 bg-green-300 rounded-t"></div>
-                <div className="w-3 h-16 bg-blue-500 rounded-t"></div>
-                <div className="w-3 h-6 bg-blue-300 rounded-t"></div>
-              </div>
-
-              {/* 9 AM */}
-              <div className="flex items-end gap-0.5 flex-1 max-w-[50px] mx-1">
-                <div className="w-3 h-20 bg-green-500 rounded-t"></div>
-                <div className="w-3 h-12 bg-green-300 rounded-t"></div>
-                <div className="w-3 h-24 bg-blue-500 rounded-t"></div>
-                <div className="w-3 h-10 bg-blue-300 rounded-t"></div>
-              </div>
-
-              {/* 10 AM */}
-              <div className="flex items-end gap-0.5 flex-1 max-w-[50px] mx-1">
-                <div className="w-3 h-16 bg-green-500 rounded-t"></div>
-                <div className="w-3 h-14 bg-green-300 rounded-t"></div>
-                <div className="w-3 h-20 bg-blue-500 rounded-t"></div>
-                <div className="w-3 h-8 bg-blue-300 rounded-t"></div>
-              </div>
-
-              {/* 11 AM */}
-              <div className="flex items-end gap-0.5 flex-1 max-w-[50px] mx-1">
-                <div className="w-3 h-24 bg-green-500 rounded-t"></div>
-                <div className="w-3 h-18 bg-green-300 rounded-t"></div>
-                <div className="w-3 h-28 bg-blue-500 rounded-t"></div>
-                <div className="w-3 h-12 bg-blue-300 rounded-t"></div>
-              </div>
-
-              {/* 12 PM */}
-              <div className="flex items-end gap-0.5 flex-1 max-w-[50px] mx-1">
-                <div className="w-3 h-32 bg-green-500 rounded-t"></div>
-                <div className="w-3 h-24 bg-green-300 rounded-t"></div>
-                <div className="w-3 h-36 bg-blue-500 rounded-t"></div>
-                <div className="w-3 h-16 bg-blue-300 rounded-t"></div>
-              </div>
-
-              {/* 1 PM */}
-              <div className="flex items-end gap-0.5 flex-1 max-w-[50px] mx-1">
-                <div className="w-3 h-28 bg-green-500 rounded-t"></div>
-                <div className="w-3 h-20 bg-green-300 rounded-t"></div>
-                <div className="w-3 h-32 bg-blue-500 rounded-t"></div>
-                <div className="w-3 h-14 bg-blue-300 rounded-t"></div>
-              </div>
-
-              {/* 2 PM */}
-              <div className="flex items-end gap-0.5 flex-1 max-w-[50px] mx-1">
-                <div className="w-3 h-20 bg-green-500 rounded-t"></div>
-                <div className="w-3 h-16 bg-green-300 rounded-t"></div>
-                <div className="w-3 h-24 bg-blue-500 rounded-t"></div>
-                <div className="w-3 h-10 bg-blue-300 rounded-t"></div>
-              </div>
-            </div>
-
-            {/* X-axis labels */}
-            <div className="flex justify-between px-2 mt-2">
-              <span className="text-xs text-gray-500">8 AM</span>
-              <span className="text-xs text-gray-500">9 AM</span>
-              <span className="text-xs text-gray-500">10 AM</span>
-              <span className="text-xs text-gray-500">11 AM</span>
-              <span className="text-xs text-gray-500">12 PM</span>
-              <span className="text-xs text-gray-500">1 PM</span>
-              <span className="text-xs text-gray-500">2 PM</span>
-            </div>
-          </div>
-
-          {/* Legend */}
-          <div className="flex justify-center gap-4 mt-4 flex-wrap">
-            <div className="flex items-center gap-1">
-              <div className="w-2 h-2 bg-green-500 rounded"></div>
-              <span className="text-xs text-gray-600">Earn</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <div className="w-2 h-2 bg-green-300 rounded"></div>
-              <span className="text-xs text-gray-600">Spend</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <div className="w-2 h-2 bg-blue-500 rounded"></div>
-              <span className="text-xs text-gray-600">Vouchers</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <div className="w-2 h-2 bg-blue-300 rounded"></div>
-              <span className="text-xs text-gray-600">Paid Customer</span>
-            </div>
-          </div>
+        {/* Reports Chart */}
+        <div className="w-full">
+          <EarningReportsChart />
         </div>
       </div>
     </div>

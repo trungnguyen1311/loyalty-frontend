@@ -22,8 +22,8 @@ export const AppLayout = memo(() => {
 
   // Common container class to sync Header and Content
   const containerClass = isFullWidth
-    ? "max-w-full px-6"
-    : "max-w-[830px] mx-auto w-full";
+    ? "max-w-full px-4 md:px-10"
+    : "max-w-[830px] mx-auto w-full px-4 md:px-10";
 
   return (
     <div className={cn(styles["app-layout"], "pt-[72px]")}>

@@ -4,6 +4,10 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      boxShadow: {
+        e3: "0px 1px 1px -0.5px var(--elevation-shadow), 0px 3px 3px -1.5px var(--elevation-shadow), 0px 20px 20px -12px var(--elevation-shadow)",
+        card: "var(--shadow-card)",
+      },
       fontFamily: {
         sans: [
           "Poppins",
@@ -33,6 +37,10 @@ export default {
         surface: {
           "info-alpha": "rgba(6, 177, 241, 0.12)",
           "primary-alpha": "rgba(121, 107, 255, 0.12)",
+          "success-med-em": "var(--surface-success-med-em)",
+          "success-low-em": "var(--surface-success-low-em)",
+          "info-low-em": "var(--surface-info-low-em)",
+          "info-med-em": "var(--surface-info-med-em)",
         },
         primary: {
           DEFAULT: "hsl(var(--primary))",
@@ -90,6 +98,8 @@ export default {
         outlinePrimaryButtonBottom: "var(--outline-primary-button-bottom)",
         elevationShadow: "var(--elevation-shadow)",
         colorWhite12: "var(--color-white-12)",
+        colorWhite3: "var(--color-white-3)",
+
         colorBackgroundSubtle: "var(--color-background-subtle)",
         gray200: "var(--gray-200)",
         colorBorderDefault: "var(--color-border-default)",
@@ -107,13 +117,30 @@ export default {
           "var(--surface-special-secondary-alpha-base)",
         outlineSecondaryButtonBottom: "var(--outline-secondary-button-bottom)",
         outlineSecondaryButtonTop: "var(--outline-secondary-button-top)",
+        outlineMedEm: "var(--outline-med-em)",
         outlineBaseEm: "var(--outline-base-em)",
+        outlineLowEm: "rgba(0, 0, 0, 0.06)",
         surfaceS0: "var(--surface-s0)",
         surfaceSpecialLightS0DarkS1: "var(--surface-special-light-s0-dark-s1)",
         outlineSecondary: "transparent",
         outlinePrimary: "transparent",
         surfaceSuccessBaseEmAlpha: "var(--surface-success-base-em-alpha)",
+        surfaceDangerBaseEmAlpha: "var(--surface-danger-base-em-alpha)",
+        surfaceInfoBaseEmAlpha: "var(--surface-info-base-em-alpha)",
+        outlineInfoHighEm: "var(--outline-info-high-em)",
         textPrimaryHighEm: "var(--text-primary-high-em)",
+        universal: {
+          "text-regular": "var(--universal-palette-text-regular)",
+          "border-white": "var(--universal-palette-border-white)",
+        },
+        surfaceS1: "var(--surface-s1)",
+        textBaseEm: "var(--text-base-em)",
+        surfaceSpecialLightS0DarkS2: "var(--surface-special-light-s0-dark-s2)",
+        gray: {
+          2: "var(--gray-2)",
+          light: "var(--light-gray)",
+        },
+        surfaceInverseWhite: "var(--surface-inverse-white)",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -122,13 +149,24 @@ export default {
         xxl: "var(--radius-xxl)",
         xs: "var(--radius-xs)",
         "comp-md": "var(--radius-md)", // Renamed to comp-md to avoid conflict? Or keep md?
+        "comp-lg": "var(--radius-comp-lg)",
         // User asked for radius_0.
         0: "var(--radius-0)",
+        "comp-sm": "var(--radius-comp-sm)",
+        "big-comp-sm": "var(--radius-big-component-sm)",
+        "figma-md": "var(--radius-figma-md)",
+        "big-comp-md": "var(--radius-big-comp-md)",
       },
       fontSize: {
         "body-1": ["var(--font-size-body-1)", "var(--line-height-body-1)"],
         "body-2": ["var(--font-size-body-2)", "var(--line-height-body-2)"],
         "title-2": ["var(--font-size-title-2)", "var(--line-height-title-2)"],
+        "heading-2": [
+          "var(--font-size-heading-2)",
+          "var(--line-height-heading-2)",
+        ],
+        sm: "var(--font-size-sm)",
+
         sm: "var(--font-size-sm)",
       },
       fontWeight: {
@@ -143,6 +181,13 @@ export default {
         "3xl": "var(--spacing-3xl)",
         "5xl": "var(--spacing-5xl)",
         "7xl": "var(--spacing-7xl)",
+        "7xl": "var(--spacing-7xl)", // 24
+        "card-header": "var(--misc-card-header)",
+        "figma-xxs": "var(--space-figma-xxs)",
+        "figma-xs": "var(--space-figma-xs)",
+        "figma-md": "var(--space-figma-md)",
+        "figma-4xl": "var(--space-figma-4xl)",
+        "figma-10xl": "var(--space-figma-10xl)",
       },
     },
   },

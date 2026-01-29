@@ -1,0 +1,151 @@
+{
+  "nodeId": "25:2416",
+  "name": "Modal",
+  "width": 361,
+  "height": 326,
+  "styles": {
+    "borderRadius": "20px",
+    "boxShadow": "0px 1px 1px -0.5px rgba(0,0,0,0.03), 0px 3px 3px -1.5px rgba(0,0,0,0.03), 0px 20px 20px -12px rgba(0,0,0,0.03), 0px 32px 32px -16px rgba(0,0,0,0.03)",
+    "border": "1px solid rgba(0,0,0,0.03)",
+    "backgroundColor": "white",
+    "backdropBlur": "24px"
+  },
+  "children": [
+    {
+      "nodeId": "25:2418",
+      "name": "Modal_header",
+      "styles": {
+        "padding": "16px 20px",
+        "gap": "8px",
+        "flexDirection": "column",
+        "alignItems": "center"
+      },
+      "children": [
+        {
+          "nodeId": "I25:2418;14156:25834",
+          "name": "icon",
+          "styles": {
+            "padding": "12px 0px"
+          },
+          "children": [
+            {
+              "nodeId": "I25:2418;14156:25600",
+              "name": "Feature_icon",
+              "styles": {
+                "width": "48px",
+                "height": "48px",
+                "borderRadius": "10px",
+                "backgroundColor": "rgba(237, 64, 48, 0.12)",
+                "display": "flex",
+                "alignItems": "center",
+                "justifyContent": "center"
+              }
+            }
+          ]
+        },
+        {
+          "nodeId": "I25:2418;14156:25601",
+          "name": "Text_wrap",
+          "styles": {
+            "width": "100%",
+            "gap": "8px",
+            "flexDirection": "column",
+            "alignItems": "center"
+          },
+          "children": [
+            {
+              "nodeId": "I25:2418;22038:14031",
+              "name": "Heading_wrap",
+              "text": "Void Transactions",
+              "typography": {
+                "fontFamily": "Poppins",
+                "fontWeight": "SemiBold",
+                "fontSize": "18px",
+                "lineHeight": "24px",
+                "color": "#0a0c11",
+                "note": "Derived from variable Typeface/size/title_2"
+              }
+            },
+            {
+              "nodeId": "I25:2418;22038:14033",
+              "name": "Support_text",
+              "text": "Are you sure you want to cancel the \nWallbridge’s transaction?",
+              "typography": {
+                "fontFamily": "Poppins",
+                "fontWeight": "Regular",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "color": "#0a0c11",
+                "note": "Derived from variable Typeface/size/body_1"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nodeId": "25:2419",
+      "name": "Input_cell",
+      "styles": {
+        "padding": "12px",
+        "gap": "4px",
+        "borderRadius": "12px",
+        "border": "1px solid rgba(0,0,0,0.09)",
+        "height": "48px"
+      },
+      "children": [
+        {
+          "text": "Select reason",
+          "typography": {
+            "fontSize": "16px",
+            "color": "#8c929c",
+            "lineHeight": "24px",
+            "note": "Derived from variable Typeface/size/body_2"
+          }
+        }
+      ]
+    },
+    {
+      "nodeId": "25:2420",
+      "name": "Modal_actions",
+      "styles": {
+        "padding": "24px 20px",
+        "gap": "16px"
+      },
+      "children": [
+        {
+          "name": "Button No",
+          "styles": {
+            "height": "40px",
+            "borderRadius": "10px",
+            "backgroundColor": "rgba(242, 242, 244, 0.8)",
+            "border": "1px solid rgba(0, 0, 0, 0.06)",
+            "shadow": "0px 2px 1.5px 0px rgba(0,0,0,0.03)"
+          },
+          "typography": {
+            "fontSize": "14px",
+            "fontWeight": "Medium",
+            "color": "#0a0c11",
+            "lineHeight": "20px"
+          }
+        },
+        {
+          "name": "Button Yes",
+          "styles": {
+            "height": "40px",
+            "borderRadius": "10px",
+            "backgroundColor": "#6f61ff",
+            "border": "1px solid rgba(0,0,0,0.09)",
+            "shadow": "0px 2px 1.5px 0px rgba(0,0,0,0.03)"
+          },
+          "typography": {
+            "fontSize": "14px",
+            "fontWeight": "Medium",
+            "color": "white",
+            "lineHeight": "20px"
+          }
+        }
+      ]
+    }
+  ]
+}

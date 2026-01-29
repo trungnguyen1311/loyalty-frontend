@@ -49,10 +49,10 @@ export const Header = memo(({ containerClass }: HeaderProps) => {
   };
 
   return (
-    <header className="h-[72px] flex items-center">
+    <header className="relative z-10 h-[72px] flex items-center">
       <div
         className={cn(
-          "flex items-center justify-between w-full h-full",
+          "flex items-center justify-between w-full h-full sm:px-4",
           containerClass,
         )}
       >
@@ -106,7 +106,7 @@ export const Header = memo(({ containerClass }: HeaderProps) => {
         </DropdownMenu>
 
         {/* Logo Center */}
-        <div className="w-[168px] h-12">
+        <div className="w-[120px] md:w-[168px] h-12">
           <img
             src={logoSrc}
             alt="Treubär Logo"

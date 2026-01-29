@@ -1,20 +1,58 @@
 import { useState } from "react";
 import { TransactionFilters } from "@/components/transaction/transaction-filters";
-import { Transaction } from "@/components/transaction/transaction-table";
 import {
   TableTransaction,
   Transaction as TableTransactionItem,
 } from "@/components/tables/TableTransaction";
+import { CardTransaction } from "@/components/transactions/CardTransaction";
+import { TransactionDetailsDialog } from "@/components/dialogs/TransactionDetailsDialog";
+import { VoidTransactionDialog } from "@/components/dialogs/VoidTransactionDialog";
+
+// Unified mock data type for better consistency across components
+export interface MockTransaction {
+  id: string;
+  staffName: string;
+  customer: {
+    name: string;
+    email: string;
+    level: "Gold" | "Silver" | "Bronze";
+    points: string;
+    avatarUrl?: string;
+  };
+  bill: {
+    amount: number;
+    currency: string;
+  };
+  voucher?: string;
+  pointsEarned: string;
+  pointsSpent: string;
+  date: string;
+  time: string;
+  status: "completed" | "voided";
+  editHistory?: {
+    reason: string;
+    description: string;
+    updatedBy: string;
+    date: string;
+  };
+}
 
 // Mock data matching Figma design
-const mockTransactions: Transaction[] = [
+const mockTransactions: MockTransaction[] = [
   {
     id: "1",
     staffName: "Megan Roberts",
-    customerName: "Olsen, Heidi",
-    customerEmail: "abc@gmail.com",
-    bill: 100,
-    currency: "€",
+    customer: {
+      name: "Olsen, Heidi",
+      email: "abc@gmail.com",
+      level: "Gold",
+      points: "2,500",
+      avatarUrl: "https://i.pravatar.cc/150?u=heidi",
+    },
+    bill: { amount: 100, currency: "€" },
+    voucher: "15%",
+    pointsEarned: "+2",
+    pointsSpent: "-10",
     date: "22 Oct 2025",
     time: "3:30 PM",
     status: "completed",
@@ -22,98 +60,37 @@ const mockTransactions: Transaction[] = [
   {
     id: "2",
     staffName: "Jonathan Smith",
-    customerName: "Smith, John",
-    customerEmail: "john.smith@gmail.com",
-    bill: 100,
-    currency: "€",
+    customer: {
+      name: "Smith, John",
+      email: "john.smith@gmail.com",
+      level: "Silver",
+      points: "1,200",
+    },
+    bill: { amount: 100, currency: "€" },
+    pointsEarned: "+2",
+    pointsSpent: "0",
     date: "22 Oct 2025",
     time: "3:30 PM",
-    status: "voided",
+    status: "completed",
+    editHistory: {
+      reason: "Incorrect Bill Amount",
+      description: "Change bill value from €110 to €100",
+      updatedBy: "David Johnson",
+      date: "22 Oct 2025, 3:40 PM",
+    },
   },
   {
     id: "3",
     staffName: "Emily Johnson",
-    customerName: "Johnson, Emma",
-    customerEmail: "emma.johnson@yahoo.com",
-    bill: 100,
-    currency: "€",
-    date: "22 Oct 2025",
-    time: "3:30 PM",
-    status: "completed",
-  },
-  {
-    id: "4",
-    staffName: "Michael Brown",
-    customerName: "Brown, Michael",
-    customerEmail: "michael.brown@hotmail.com",
-    bill: 100,
-    currency: "€",
-    date: "22 Oct 2025",
-    time: "3:30 PM",
-    status: "completed",
-  },
-  {
-    id: "5",
-    staffName: "Sarah Davis",
-    customerName: "Taylor, Olivia",
-    customerEmail: "olivia.taylor@outlook.com",
-    bill: 100,
-    currency: "€",
-    date: "22 Oct 2025",
-    time: "3:30 PM",
-    status: "completed",
-  },
-  {
-    id: "6",
-    staffName: "David Wilson",
-    customerName: "Davis, William",
-    customerEmail: "william.davis@gmail.com",
-    bill: 100,
-    currency: "€",
-    date: "22 Oct 2025",
-    time: "3:30 PM",
-    status: "completed",
-  },
-  {
-    id: "7",
-    staffName: "Jessica Garcia",
-    customerName: "Miller, Sophia",
-    customerEmail: "sophia.miller@icloud.com",
-    bill: 100,
-    currency: "€",
-    date: "22 Oct 2025",
-    time: "3:30 PM",
-    status: "completed",
-  },
-  {
-    id: "8",
-    staffName: "James Martinez",
-    customerName: "Wilson, James",
-    customerEmail: "james.wilson@gmail.com",
-    bill: 100,
-    currency: "€",
-    date: "22 Oct 2025",
-    time: "3:30 PM",
-    status: "voided",
-  },
-  {
-    id: "9",
-    staffName: "Linda Rodriguez",
-    customerName: "Moore, Ava",
-    customerEmail: "ava.moore@yahoo.com",
-    bill: 100,
-    currency: "€",
-    date: "22 Oct 2025",
-    time: "3:30 PM",
-    status: "voided",
-  },
-  {
-    id: "10",
-    staffName: "William Lee",
-    customerName: "Taylor, Daniel",
-    customerEmail: "daniel.taylor@hotmail.com",
-    bill: 100,
-    currency: "€",
+    customer: {
+      name: "Johnson, Emma",
+      email: "emma.johnson@yahoo.com",
+      level: "Bronze",
+      points: "500",
+    },
+    bill: { amount: 100, currency: "€" },
+    pointsEarned: "+2",
+    pointsSpent: "-10",
     date: "22 Oct 2025",
     time: "3:30 PM",
     status: "voided",
@@ -123,9 +100,17 @@ const mockTransactions: Transaction[] = [
 export const TransactionPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [resultsPerPage, setResultsPerPage] = useState(10);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const [isVoidOpen, setIsVoidOpen] = useState(false);
+  const [selectedTxId, setSelectedTxId] = useState<string | null>(null);
+
+  const selectedTransaction = mockTransactions.find(
+    (t) => t.id === selectedTxId,
+  );
 
   const handleView = (id: string) => {
-    console.log("View transaction:", id);
+    setSelectedTxId(id);
+    setIsDetailsOpen(true);
   };
 
   const handleEdit = (id: string) => {
@@ -140,19 +125,16 @@ export const TransactionPage = () => {
   const tableData: TableTransactionItem[] = mockTransactions.map((t) => ({
     id: t.id,
     staffName: t.staffName,
-    customerName: t.customerName,
-    customerEmail: t.customerEmail,
-    billAmount: `${t.currency}${t.bill}`,
+    customerName: t.customer.name,
+    customerEmail: t.customer.email,
+    billAmount: `${t.bill.currency}${t.bill.amount}`,
     date: `${t.date}, ${t.time}`,
-    status: t.status === "completed" ? "Completed" : "Voiced",
+    status: t.status === "completed" ? "Completed" : "Voided",
   }));
 
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-semibold text-[#0A0C11]">
-          Old Table (Reference)
-        </h1>
         <TransactionFilters
           onSearchChange={(value) => console.log("Search:", value)}
           onStaffChange={(value) => console.log("Staff:", value)}
@@ -160,10 +142,8 @@ export const TransactionPage = () => {
         />
       </div>
 
-      <div className="pt-10 border-t border-dashed border-gray-300">
-        <h1 className="text-2xl font-semibold mb-6 text-[#0A0C11]">
-          New TableTransaction (Figma 1:1)
-        </h1>
+      {/* Desktop: Show Table */}
+      <div className="hidden md:block mt-5">
         <TableTransaction
           data={tableData}
           onView={handleView}
@@ -171,6 +151,44 @@ export const TransactionPage = () => {
           onDelete={handleCancel}
         />
       </div>
+
+      {/* Mobile: Show Cards */}
+      <div className="flex flex-col gap-3 md:hidden mt-5">
+        {tableData.map((transaction) => (
+          <CardTransaction
+            key={transaction.id}
+            data={transaction}
+            onView={handleView}
+            onEdit={handleEdit}
+            onDelete={handleCancel}
+          />
+        ))}
+      </div>
+
+      <TransactionDetailsDialog
+        open={isDetailsOpen}
+        onOpenChange={setIsDetailsOpen}
+        onEdit={() => {
+          console.log("Edit from dialog:", selectedTxId);
+          setIsDetailsOpen(false);
+        }}
+        onVoid={() => {
+          setIsDetailsOpen(false);
+          setIsVoidOpen(true);
+        }}
+        transactionData={selectedTransaction}
+      />
+
+      <VoidTransactionDialog
+        open={isVoidOpen}
+        onOpenChange={setIsVoidOpen}
+        onConfirm={() => {
+          console.log("Confirmed void for:", selectedTxId);
+          // Add actual void logic here
+          setIsVoidOpen(false);
+        }}
+        customerName={selectedTransaction?.customer.name}
+      />
     </div>
   );
 };

@@ -1,9 +1,16 @@
 import { memo, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { Eye, EyeOff, ChevronDown, Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useTranslation } from "react-i18next";
 
 export const LoginPage = memo(() => {
@@ -68,22 +75,34 @@ export const LoginPage = memo(() => {
                     {t("auth.store")}
                   </Label>
                   <div className="relative">
-                    <select
-                      id="store"
+                    <Select
                       value={storeId}
-                      onChange={(e) => setStoreId(e.target.value)}
-                      className="w-full h-[48px] px-[12px] pr-12 rounded-[12px] border border-[rgba(0,0,0,0.09)] bg-white text-[#1E293B] placeholder:text-[#8C929C] focus:outline-none focus:ring-2 focus:ring-[#6F61FF]/10 focus:border-[#6F61FF] appearance-none text-[16px] font-normal transition-all"
+                      onValueChange={setStoreId}
                       disabled={isLoading}
                     >
-                      <option value="" className="text-[#8C929C]">
-                        {t("auth.select_store")}
-                      </option>
-                      <option value="lepau">Lepau Restaurant Kuching</option>
-                      <option value="store-2">Treubär Coffee Hub</option>
-                    </select>
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                      <ChevronDown className="w-5 h-5 text-[#8C929C]" />
-                    </div>
+                      <SelectTrigger
+                        id="store"
+                        className="w-full h-[48px] px-[12px] rounded-[12px] border border-[rgba(0,0,0,0.09)] bg-white text-[#1E293B] focus:ring-2 focus:ring-[#6F61FF]/10 focus:border-[#6F61FF] text-[16px] font-normal transition-all"
+                      >
+                        <SelectValue placeholder={t("auth.select_store")} />
+                      </SelectTrigger>
+                      <SelectContent className="rounded-[20px] border border-[rgba(0,0,0,0.03)] bg-white/80 backdrop-blur-[24px] shadow-[0px_1px_1px_-0.5px_rgba(0,0,0,0.03),0px_3px_3px_-1.5px_rgba(0,0,0,0.03),0px_20px_20px_-12px_rgba(0,0,0,0.03)]">
+                        <div className="flex flex-col gap-[4px] p-1">
+                          <SelectItem
+                            value="lepau"
+                            className="rounded-[12px] px-[12px] py-[10px] text-[14px] font-medium leading-[20px] text-[#5B616D] focus:bg-black/[0.03] focus:text-[#0A0C11] data-[state=checked]:text-[#0A0C11] data-[state=checked]:bg-black/[0.03] cursor-pointer transition-all"
+                          >
+                            Lepau Restaurant Kuching
+                          </SelectItem>
+                          <SelectItem
+                            value="store-2"
+                            className="rounded-[12px] px-[12px] py-[10px] text-[14px] font-medium leading-[20px] text-[#5B616D] focus:bg-black/[0.03] focus:text-[#0A0C11] data-[state=checked]:text-[#0A0C11] data-[state=checked]:bg-black/[0.03] cursor-pointer transition-all"
+                          >
+                            Treubär Coffee Hub
+                          </SelectItem>
+                        </div>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
 

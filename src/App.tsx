@@ -51,7 +51,7 @@ const AppBootstrap = memo(() => {
     // Listen for logout events from axios interceptor
     window.addEventListener("auth:logout", handleLogout);
     return () => window.removeEventListener("auth:logout", handleLogout);
-  }, [fetchMe, logout, navigate, handleLogout]);
+  }, []);
 
   // Show loading while bootstrapping
   if (!isInitialized || isLoading) {
@@ -100,9 +100,7 @@ AppBootstrap.displayName = "AppBootstrap";
 
 const App = memo(() => {
   return (
-    <BrowserRouter
-      future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
-    >
+    <BrowserRouter>
       <AppBootstrap />
     </BrowserRouter>
   );

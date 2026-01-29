@@ -1,1 +1,9 @@
 node_modules
+
+# Figma Debug (local only - không push lên github)
+.figma-debug/
+figma-node-tree.json
+.env.figma
+
+# Build output
+dist/

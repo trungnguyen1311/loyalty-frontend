@@ -1,12 +1,11 @@
-import { Button } from "@/components/ui/button";
-import { PinEntryDialog } from "@/components/dialogs/PinEntryDialog";
-import { TransactionDetailsDialog } from "@/components/dialogs/TransactionDetailsDialog";
 import { DiscountCalculationCard } from "@/components/common/DiscountCalculationCard";
+import { PinEntryDialog } from "@/components/dialogs/PinEntryDialog";
+import { Button } from "@/components/ui/button";
 
+import Avatar from "@/assets/images/avatar.svg";
 import { Slider } from "@/components/ui/slider";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Avatar from "@/assets/images/avatar.svg";
 
 // Mock customer data
 const mockCustomer = {
@@ -61,9 +60,6 @@ export const UsePointsPage = () => {
   const [billValue, setBillValue] = useState(() => "");
   const [pin, setPin] = useState(() => ["", "", "", "", "", ""]);
   const [hasVoucher] = useState(() => true);
-  const [showTransactionDetails, setShowTransactionDetails] = useState(
-    () => false,
-  );
 
   const mockVoucher = {
     name: "New Brand Opening",
@@ -315,10 +311,7 @@ export const UsePointsPage = () => {
                 Please ensure payment is completed on POS first
               </p>
 
-              <Button
-                onClick={() => setShowTransactionDetails(true)}
-                className="w-full h-[48px] bg-surfacePrimaryMedEm hover:bg-surfacePrimaryHighEm text-white rounded-xxl text-[16px] font-semibold"
-              >
+              <Button className="w-full h-[48px] bg-surfacePrimaryMedEm hover:bg-surfacePrimaryHighEm text-white rounded-xxl text-[16px] font-semibold">
                 Mark transaction as complete
               </Button>
               <Button
@@ -343,14 +336,6 @@ export const UsePointsPage = () => {
         onPinChange={handlePinChange}
         onPinKeyDown={handlePinKeyDown}
         onSubmit={handlePinSubmit}
-      />
-
-      {/* Transaction Details Dialog */}
-      <TransactionDetailsDialog
-        open={showTransactionDetails}
-        onOpenChange={setShowTransactionDetails}
-        onEdit={() => setShowTransactionDetails(false)}
-        onVoid={() => setShowTransactionDetails(false)}
       />
     </div>
   );

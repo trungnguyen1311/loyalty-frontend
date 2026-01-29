@@ -19,7 +19,7 @@ export interface Transaction {
   customerEmail: string;
   billAmount: string;
   date: string;
-  status: "Completed" | "Voiced";
+  status: "Completed" | "Voided";
 }
 
 interface TableTransactionProps {
@@ -89,7 +89,7 @@ export function TableTransaction({
                     className={cn(
                       "font-medium px-2 py-1 h-6 rounded-lg border-0 shadow-none",
                       item.status === "Completed"
-                        ? "bg-[#409B3F]/15 text-[#338732] hover:bg-[#409B3F]/25"
+                        ? "bg-surfaceSuccessBaseEmAlpha text-outlineSuccessHighEm hover:bg-surfaceSuccessBaseEmAlpha"
                         : "bg-[#ED4030]/15 text-[#DF2917] hover:bg-[#ED4030]/25",
                     )}
                   >
